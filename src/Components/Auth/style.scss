@@ -1,0 +1,16 @@
+.Auth {
+  z-index: 10;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 20%;
+  align-items: center;
+  .auth-form {
+    width: 200px;
+    height: auto;
+    -webkit-filter: blur(20px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+  }
+}

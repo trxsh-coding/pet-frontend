@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useLayoutEffect} from 'react';
+import {withRouter} from "react-router-dom";
+import './styles.scss'
+import Header from "./Components/Main/Layout/Header";
+import {getStatus} from "./api/status";
+import Routing from "./router";
+import {useDispatch} from "react-redux";
+import {getCurrentUser} from "./store/modules/user";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+async function initialize() {
+    const {status} = await getStatus();
+    return status === 200
 }
 
-export default App;
+function App(props) {
+    const {history} = props;
+    const dispatch = useDispatch();
+    useLayoutEffect(() => {
+         initialize().then(callback => {
+             if(!callback) history.push('/auth/login');
+             else dispatch(getCurrentUser())
+         })
+
+    }, []);
+    return (
+        <div className="App">
+            <Header/>
+            <Routing/>
+        </div>
+    );
+}
+
+export default withRouter(App);
