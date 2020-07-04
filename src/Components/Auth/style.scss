@@ -13,4 +13,15 @@
     -ms-filter: blur(15px);
     filter: blur(15px);
   }
+  .register-link {
+    text-align: right;
+    span {
+      font-size: 12px;
+    }
+    .link {
+      color:#4A76A8;
+      cursor: pointer;
+    }
+  }
 }
+

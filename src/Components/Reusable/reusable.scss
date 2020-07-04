@@ -32,3 +32,34 @@
     }
   }
 }
+
+.component-wrapper {
+  margin-top: 60px;
+  border-radius: 5px;
+  background: #ffffff;
+  .wrapper-body {
+    background: #ffffff;
+    padding: 20px 15px;
+  }
+  .wrapper-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: #4A76A8;
+    span {
+      color: #ffffff;
+    }
+  }
+}
+.input-wrapper {
+  background: #F2F2F2;
+  border-radius: 10px;
+  display: flex;
+  .reusable-input {
+    border:none;
+    width: 100%;
+    display: flex;
+    background: #F2F2F2;
+  }
+}

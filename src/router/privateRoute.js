@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {Route, Redirect} from 'react-router-dom';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getStatus} from "../api/status";
+
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
-    let status = useSelector(state => state.auth.status);
-
-
-
+    const dispatch = useDispatch()
+    const current = useSelector( s => s.user.current) ;
+    const user = useSelector( s => s.user.data[current]) ;
     return (
         <Route
             {...rest}
             render={props =>
-                    status? (
+                user? (
                     <Component {...props} />
                 ) : (
                     <Redirect

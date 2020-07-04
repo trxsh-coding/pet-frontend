@@ -5,6 +5,7 @@ import User from "./Pages/User";
 import Pet from "./Pages/Pet";
 import Header from "./Layout/Header";
 import Feed from "./Pages/Feed";
+import Post from "./Pages/Post";
 
 function Main(props) {
     const isLoggedIn = useSelector(state => Object.keys(state.user.data).length);
@@ -17,7 +18,8 @@ function Main(props) {
                 <Switch>
                     <Route  path="/user:id" component={User}/>
                     <Route  path="/pet:id" component={Pet}/>
-                    <Route  path="/feed" component={Feed}/>
+                    <Route  path="/post" component={Feed}/>
+                    <Route  path="/post:id" component={Post}/>
                 </Switch>
             </Router>
         </div>

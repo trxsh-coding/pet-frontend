@@ -1,34 +1,39 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+//hooks
+import { useDispatch } from "react-redux";
+import { withRouter } from 'react-router-dom';
+import {UPDATE_PICTURE} from "../../../../store/types";
+
+//components
 import ReusableImage from "../../../Reusable/Image";
-import { Links } from "./links";
 import ReusableUpload from "../../../Reusable/Upload";
-import { useDispatch, useSelector } from "react-redux";
-import { updateImage } from "../../../../store/modules/user";
+import { Links } from "./links";
+
+//styles
 import '../style.scss'
-import {AnnotationInfo} from "./info";
+
+const ImageWrapper = ({children, route, model, current, action, id}) => {
+    const dispatch = useDispatch();
+    const onUpload = (route, model, id) => file => dispatch(action[UPDATE_PICTURE](file, route, model, id))
+    return  current ? (
+        <ReusableUpload action={onUpload(route, model, id)}>
+            {children}
+        </ReusableUpload>
+    ) : <div> {children} </div>
+}
 
 function Annotation(props) {
-
-    const {username, avatar, background, id} = props;
-
-    const dispatch = useDispatch();
-
-    const onUpload = route => file => {
-
-        dispatch(updateImage(file, route))
-
-    };
+    const {username, avatar, background} = props;
      return (
          <>
              <div className="annotation-wrapper relative">
-                 <ReusableUpload action={onUpload('background')}>
+                 <ImageWrapper route='background' {...props}>
                      <ReusableImage width='100%' height='300px' fromServer link={background}/>
-                 </ReusableUpload>
+                 </ImageWrapper>
                  <div className="image-wrapper ">
-                     <ReusableUpload action={onUpload('avatar')}>
+                     <ImageWrapper route='avatar' {...props}>
                          <ReusableImage size={200} rounded link={avatar} fromServer />
-                     </ReusableUpload>
+                     </ImageWrapper>
                  </div>
                  <Links username={username} />
              </div>

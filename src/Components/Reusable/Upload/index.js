@@ -7,8 +7,8 @@ const ReusableUpload = (props) => {
     const {action} = props;
     const [hover, setHover] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const onHover = bool => setHover(bool);
+
     const onChange = async e => {
         try {
             setLoading(true);

@@ -101,12 +101,15 @@ export default class Reducer {
                 }
             }
             case UPDATE_FIELD: {
-                const {key, value, map} = payload;
+                const {key, value, map, field} = payload;
                 return  {
                     ...state,
                     [map]: {
                         ...state[map],
-                        [key]:value
+                        [key]:{
+                            ...state[map][key],
+                            [field]:value
+                        }
                     }
                 }
             }

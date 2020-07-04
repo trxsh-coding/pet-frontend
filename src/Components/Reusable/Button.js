@@ -8,6 +8,7 @@ const ReusableButton = ({children, styles, action, submit}) => {
         borderRadius:'5px',
         color:'#ffffff',
         minWidth:'120px',
+        cursor:'pointer',
         ...styles
     };
 

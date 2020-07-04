@@ -25,7 +25,7 @@ export const ROUTE_NAMES = Object.freeze({
    },
    MAIN: {
        FEED:'Лента',
-       SUBSCRIBERS:'Подписки',
+       SUBSCRIPTIONS:'Подписки',
        SEARCH:'Поиск',
        NOTIFICATIONS:'Уведомления'
    }
@@ -77,23 +77,55 @@ export const API_ROUTES = Object.freeze({
     GET_STATUS: `api/v1/user/status`,
     /**
      * @description update current user avatar, PATCH request
-     * @param none
+     * @param model
      * @returns {string}
      */
-    UPDATE_AVATAR: `api/v1/user/updateAvatar`,
+    UPDATE_AVATAR: (model) => `api/v1/${model}/updateAvatar`,
 
     /**
      * @description update current user background, PATCH request
-     * @param none
+     * @param model
      * @returns {string}
      */
-    UPDATE_BACKGROUND: `api/v1/user/updateBackground`,
-
+    UPDATE_BACKGROUND: (model) => `api/v1/${model}/updateBackground`,
     /**
      * @description get pet by ID, GET request
      * @param id
      * @returns {string}
      */
     GET_PET_BY_ID: (id) => `api/v1/pet/${id}`,
+
+    /**
+     * @description follow pet by Id, POST request
+     * @param id
+     * @returns {string}
+     */
+    FOLLOW_PET: (id) => `api/v1/pet/follow/${id}`,
+    /**
+     * @description follow pet by Id, POST request
+     * @param id
+     * @returns {string}
+     */
+    UNFOLLOW_PET: (id) => `api/v1/pet/unfollow/${id}`,
+    /**
+     * @description follow pet by Id, POST request
+     * @param id
+     * @returns {string}
+     */
+    GET_SUBSCRIPTIONS:  `api/v1/user/subscriptions/`,
+
+    /**
+     * @description follow pet by Id, POST request
+     * @param id
+     * @returns {string}
+     */
+    GET_PET_FEED: (id) =>  `api/v1/pet/feed/${id}`,
+
+    /**
+     * @description save post comment, POST request
+     * @param none
+     * @returns {string}
+     */
+    CREATE_COMMENT:`api/v1/post/comment`,
 
 })
