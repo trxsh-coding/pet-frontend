@@ -1,4 +1,3 @@
-
 import React, {useEffect, useState} from 'react';
 import PostHeader from "./Header";
 import PostBody from "./body";
