@@ -4,6 +4,7 @@ import {API_ROUTES} from "../../Constants";
 import Actions from "../action";
 import {getKey} from "../../Utils/arrayMethods";
 import {pet} from './pet'
+import {socket} from "../../Utils/socket";
 export const user = new Reducer('_USER', {data:{}, current:null, subscriptions:[]});
 const actions = new Actions('user', user);
 export const userActions = actions;
@@ -20,6 +21,7 @@ export const getCurrentUser = _ => async (dispatch) => {
         payload: getKey(data),
         key:'current'
     });
+
 };
 
 export const getUser = id => async (dispatch) => {

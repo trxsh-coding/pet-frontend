@@ -18,7 +18,7 @@ function App(props) {
     }
     useEffect(() => {
         initialize()
-            .then(callback =>   dispatch(getCurrentUser()))
+            .then(callback =>dispatch(getCurrentUser()))
             .finally( () => setLoading(false))
     })
     return loading ? <div className='transform-center'> <Spinner/> </div> : (

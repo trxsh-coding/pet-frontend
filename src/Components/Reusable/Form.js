@@ -33,13 +33,23 @@ export const ReusableForm = ({form, addStyles, onSubmit, primary, children, erro
         marginBottom: errors? '10px' : '20px'
 
     };
+    const calculateTypeOfField = type => {
+        switch (type) {
+            case 'password' || 'passwordConfirm' :
+                return 'password'
+            case 'description':
+                return 'textarea'
+            default:
+                return 'text'
+        }
+    }
     const inputList = _ => {
         console.log(form)
         return Object.keys(form).map( el => {
             console.log(el)
             return (
                 <div className='flex-column'>
-                    <input type={el === 'password' || el ==='passwordConfirm' ? 'password' : 'text'}
+                    <input type={calculateTypeOfField(el)}
                            style={primary ? primaryStyle : secondaryStyle}
                            name={el}
                            value={values[el] || ""}

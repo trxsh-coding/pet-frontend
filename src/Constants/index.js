@@ -46,6 +46,21 @@ export const API_ROUTES = Object.freeze({
      * @param none
      */
 
+    FIND_CHAT_ROOM : (id) => `api/v1/chat/findRoom/${id}`,
+    /**
+     * @description user login in, POST request
+     * @returns {object}
+     * @param id
+     */
+
+
+    CREATE_CHAT_ROOM : `api/v1/chat/create`,
+    /**
+     * @description user login in, POST request
+     * @returns {object}
+     * @param none
+     */
+
     SIGN_IN: `api/v1/user/signin`,
     /**
      * @description get current user api, GET request
@@ -127,5 +142,12 @@ export const API_ROUTES = Object.freeze({
      * @returns {string}
      */
     CREATE_COMMENT:`api/v1/post/comment`,
+
+    /**
+     * @description send message action, POST request
+     * @returns {object}
+     * @param none
+     */
+    SEND_MESSAGE : `api/v1/chat/message/`
 
 })

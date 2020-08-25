@@ -1,11 +1,10 @@
 import socketIOClient from "socket.io-client";
+const socketState = (
+    {
+        response: false,
+        endpoint: `http://127.0.0.1:8080?id='213'`
+    }
+)
 
-const socketState = {
-    response: false,
-    endpoint: "http://127.0.0.1:4000"
-};
+export const socket  = socketIOClient(socketState.endpoint);
 
-export const socketioConnection = () => {
-    const socket = socketIOClient(socketState.endpoint);
-    socket.on("chat message", data => console.log(data));
-};

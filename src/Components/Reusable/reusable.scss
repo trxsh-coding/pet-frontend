@@ -1,5 +1,5 @@
 .modal-wrapper {
-  position:absolute;
+  position:fixed;
   top:0;
   left:0;
   height:100%;
@@ -19,10 +19,18 @@
   .modal-window {
     display: flex;
     flex-direction: column;
+    padding: 30px;
     .modal-header {
       width: 100%;
-      border-bottom: 0.5px solid #E5E5E5;
-      height: 40px;
+      display: flex;
+      flex-direction: column;
+      span {
+        text-align: center;
+        font-size: 24px;
+      }
+      .header-close-icon {
+        align-self: flex-end;
+      }
     }
     .modal-child {
       flex: 1;
@@ -56,10 +64,17 @@
   background: #F2F2F2;
   border-radius: 10px;
   display: flex;
-  .reusable-input {
+  align-items: center;
+  .reusable-input, .input-textarea, .input-textarea:focus {
+    outline: none;
     border:none;
     width: 100%;
     display: flex;
     background: #F2F2F2;
+  }
+  .input-textarea {
+    resize:none;
+    overflow:hidden;
+    max-height: 300px;
   }
 }

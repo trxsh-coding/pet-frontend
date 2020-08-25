@@ -41,6 +41,7 @@ function Pet(props) {
                     followee={followee}
                     current={isOwner}
                     editable={editable}
+                    receiver={ownerId}
                     onEdit={(value) => setEditable(value)}
                 />
                 <InfoAnnotation

@@ -5,13 +5,16 @@ import auth from "../store/modules/auth"
 import user from "../store/modules/user"
 import pet from "./modules/pet"
 import post from "./modules/post";
+import chat from "./modules/chat";
 
 const middleware = applyMiddleware(thunk);
-const rootReducer = combineReducers({
-    auth:auth,
-    user:user,
-    pet:pet,
-    post:post
+
+export const rootReducer = combineReducers({
+    auth,
+    user,
+    pet,
+    post,
+    chat
 });
 
 export const store = createStore(rootReducer, composeWithDevTools(middleware));
