@@ -1,10 +1,19 @@
 import React from 'react'
 import './reusable.scss'
 import close from '../../Assets/svg/Close.svg'
-const ReusableModal = ({children, styles, onClose, title, visible}) => {
+const ReusableModal = (props) => {
+    const {
+        children,
+        styles,
+        onClose,
+        title,
+        visible,
+        height ='661px',
+        width = '945px'
+    } = props;
     const windowStyle = {
-        width:'945px',
-        height:'661px',
+        width:width,
+        height:height,
         backgroundColor:'#fff',
         borderRadius:'5px',
         zIndex:100,
@@ -15,7 +24,7 @@ const ReusableModal = ({children, styles, onClose, title, visible}) => {
            <div className='modal-overlay' onClick={onClose}/>
            <div className="modal-window flex-column" style={windowStyle}>
                <div className="modal-header">
-                   <img src={close} width='25px' height='25px' alt='close' className='header-close-icon'/>
+                   <img src={close} width='25px' height='25px' alt='close' className='header-close-icon pointer' onClick={onClose}/>
                    <span className='pl-10 flex-center'>{title}</span>
                </div>
                <div className="modal-child">

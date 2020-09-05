@@ -3,8 +3,26 @@ import Actions from "../action";
 import user from "../reducer";
 import {api} from "../../Utils/fetch";
 import {API_ROUTES} from "../../Constants";
-export const pet = new Reducer('_PET', {data:{}, feed:null});
+import {postActions} from "./post";
+export const pet = new Reducer('_PET', {data:{}, feed:[], search:[], post:[]});
 export const petActions = new Actions('pet', pet)
+
+
+export const searchPet = query => async dispatch => {
+    const {data} = await api({URL:API_ROUTES.SEARCH_PETS_BY_QUERY, METHOD:'get', PARAMS:query});
+    petActions.setLoading(dispatch, true)
+    dispatch({
+        type: pet.actionTypes['APPEND'],
+        payload:data.pets,
+    });
+    dispatch({
+        type: pet.actionTypes['SET'],
+        payload:data.items,
+        key:'search'
+    });
+    petActions.setLoading(dispatch, false)
+
+}
 
 export const followPet = id => async dispatch => {
     const {data} = await api({URL:API_ROUTES.FOLLOW_PET(id), METHOD:'post'});

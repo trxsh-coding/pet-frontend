@@ -4,7 +4,7 @@ import upload from "../../../Assets/svg/upload.svg"
 import './style.scss'
 const ReusableUpload = (props) => {
 
-    const {action} = props;
+    const {action, withHover = true} = props;
     const [hover, setHover] = useState(false);
     const [loading, setLoading] = useState(false);
     const onHover = bool => setHover(bool);
@@ -27,7 +27,7 @@ const ReusableUpload = (props) => {
         >
             {props.children}
             <input  type="file" onChange={onChange} />
-            {hover && !loading && <img className='upload-icon' src={upload} alt='upload'/>}
+            {hover && !loading && withHover && <img className='upload-icon' src={upload} alt='upload'/>}
             {RenderSpinner}
         </div>
     )

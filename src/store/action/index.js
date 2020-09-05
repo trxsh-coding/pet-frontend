@@ -26,7 +26,7 @@ export default class Actions {
             formData.append('id', id);
             const {data} = await api({
                 URL:route === 'avatar' ?
-                    API_ROUTES.UPDATE_AVATAR(model) : API_ROUTES.UPDATE_BACKGROUND(model),
+                    API_ROUTES.UPDATE_AVATAR(this.storeName) : API_ROUTES.UPDATE_BACKGROUND(this.storeName),
                 METHOD:'patch',
                 BODY:formData
             });
@@ -47,7 +47,6 @@ export default class Actions {
     }
     [GET_BY_ID] = id => async (dispatch) =>{
         this.setLoading(dispatch, true);
-        console.log(this.storeName)
         try {
             const {data} = await api({URL:`api/v1/${this.storeName}/${id}`});
 

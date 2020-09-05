@@ -14,7 +14,18 @@
     display: flex;
     align-items: flex-end;
     padding: 30px 20px;
+    align-items: flex-end;
     height: 100%;
+    overflow-y: scroll;
+  }
+  .dialog-body::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .example {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 
   .message-description {
@@ -23,10 +34,11 @@
 
   }
   .message-input {
-    .emoji-container {
-      position: absolute;
-      left: 0;
-    }
-  }
 
+  }
+  .emoji-container {
+    position: absolute;
+    right: 0;
+    bottom:45px;
+  }
 }

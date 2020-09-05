@@ -4,8 +4,12 @@ export const api = ({URL, METHOD = 'GET', BODY, PARAMS}) => {
     return axios({
         method: METHOD,
         withCredentials:true,
-        url: 'http://localhost:8080/' + URL,
+        mode: 'no-cors',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
+        url: process.env.REACT_APP_MAIN_API + URL,
         data: BODY,
-        params: METHOD === 'GET' ? PARAMS : null
+        params: PARAMS ? PARAMS : null
     });
 };

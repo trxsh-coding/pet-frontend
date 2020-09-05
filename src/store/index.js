@@ -16,5 +16,5 @@ export const rootReducer = combineReducers({
     post,
     chat
 });
-
 export const store = createStore(rootReducer, composeWithDevTools(middleware));
+

@@ -4,10 +4,8 @@ import {API_ROUTES} from "../../Constants";
 import Actions from "../action";
 import {getKey} from "../../Utils/arrayMethods";
 import {pet} from './pet'
-import {socket} from "../../Utils/socket";
 export const user = new Reducer('_USER', {data:{}, current:null, subscriptions:[]});
-const actions = new Actions('user', user);
-export const userActions = actions;
+export const userActions = new Actions('user', user)
 
 export const getCurrentUser = _ => async (dispatch) => {
     const {data} = await api({URL:API_ROUTES.GET_CURRENT_USER, METHOD:'get'});
@@ -21,7 +19,6 @@ export const getCurrentUser = _ => async (dispatch) => {
         payload: getKey(data),
         key:'current'
     });
-
 };
 
 export const getUser = id => async (dispatch) => {
@@ -48,7 +45,6 @@ export const getSubscriptions = _ =>async (dispatch) => {
 
 export const updateImage = (file, route, model) =>  async (dispatch, getState) => {
     const state = getState()
-    console.log(state)
     try {
         const formData = new FormData();
         formData.append(route, file);
@@ -59,7 +55,6 @@ export const updateImage = (file, route, model) =>  async (dispatch, getState) =
             METHOD:'patch',
             BODY:formData
         });
-        console.log(data)
         dispatch({
             type: user.actionTypes['UPDATE_FIELD'],
             payload: {value : data, key : route, map:'current'},

@@ -5,6 +5,8 @@ import {getUser, userActions} from "../../../../store/modules/user";
 import Annotation from "../../Layout/Annotatiton";
 import UserPets from "./pets";
 import {GET_BY_ID} from "../../../../store/types";
+import UserInfoSection from "./pets/infoSection";
+import Spinner from "../../../Reusable/Spinner";
 
 function User(props) {
     const { match } = props;
@@ -15,8 +17,9 @@ function User(props) {
     const {pets} = useSelector(s => s.user.data[id] || []);
     const dispatch = useDispatch();
     useEffect(() => {
-        if(!Object.keys(user).length) dispatch(userActions[GET_BY_ID](id))
+        dispatch(userActions[GET_BY_ID](id))
     }, [id]);
+    if(!Object.keys(user).length || loading) return <div className='transform-center'> <Spinner/> </div>
     return (
         <div className="User">
             <Annotation username={user.username}
@@ -25,7 +28,7 @@ function User(props) {
                         current={current}
                         id={user._id}
             />
-            <UserPets pets={pets} id={id} current={current} loading={loading}/>
+            <UserInfoSection current={current} pets={user.pets} />
         </div>
     );
 }

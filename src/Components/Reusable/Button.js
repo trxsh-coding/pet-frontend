@@ -14,7 +14,7 @@ const ReusableButton = ({children, styles, action, submit}) => {
 
     return (
         <button onClick={action} style={buttonStyle}>
-            <span>{children}</span>
+            <span style={{fontWeight:"normal", color:'#ffffff'}}>{children}</span>
         </button>
     )
 };

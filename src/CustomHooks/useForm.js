@@ -8,13 +8,15 @@ const useForm = (form, submitCallback) => {
         e.persist();
         setState(state => ({...state, [e.target.name] : e.target.value}))
     };
-
+    const customStateChange = ({key, value}) => {
+        setState(state => ({...state, [key]: value}))
+    }
     const handleSubmit = e => {
         e.preventDefault();
         submitCallback()
     };
 
-    return [state, handleChange, handleSubmit]
+    return [state, handleChange,  customStateChange, handleSubmit ]
 };
 
 export default useForm;

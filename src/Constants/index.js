@@ -12,6 +12,10 @@ export const translateKeyword = key => {
             return 'Имя';
         case 'ages' :
             return 'Возраст';
+        case 'gender' :
+            return 'Пол';
+        case 'breed' :
+            return 'Порода';
         default:
             return key
     }
@@ -83,8 +87,16 @@ export const API_ROUTES = Object.freeze({
      */
 
     CREATE_PET : `api/v1/pet/`,
+
     /**
-     * @description get current user status, POST request
+     * @description get current user status, GET request
+     * @param none
+     * @returns {boolean}
+     */
+
+    CREATE_POST : `api/v1/post/`,
+    /**
+     * @description create post, POST request
      * @param none
      * @returns {object}
      */
@@ -137,6 +149,13 @@ export const API_ROUTES = Object.freeze({
     GET_PET_FEED: (id) =>  `api/v1/pet/feed/${id}`,
 
     /**
+     * @description follow pet by Id, POST request
+     * @param id
+     * @returns {string}
+     */
+    SEARCH_PETS_BY_QUERY: `api/v1/pet/search`,
+
+    /**
      * @description save post comment, POST request
      * @param none
      * @returns {string}
@@ -148,6 +167,13 @@ export const API_ROUTES = Object.freeze({
      * @returns {object}
      * @param none
      */
-    SEND_MESSAGE : `api/v1/chat/message/`
+    SEND_MESSAGE : `api/v1/message`,
+
+    /**
+     * @description send message with room action, POST request
+     * @returns {object}
+     * @param none
+     */
+    SEND_MESSAGE_WITH_ROOM : `api/v1/message/room`
 
 })

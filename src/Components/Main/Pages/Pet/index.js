@@ -8,7 +8,8 @@ import {GET_BY_ID} from "../../../../store/types";
 import Spinner from "../../../Reusable/Spinner";
 import PetFeed from "./Feed";
 import history from "../../../../services/history";
-
+import AmountInfoBlock from "./annotation/amountInfoBlock";
+import './styles.scss'
 function Pet(props) {
     const { match } = props;
     const { id } = match.params;
@@ -16,7 +17,9 @@ function Pet(props) {
     const pet = useSelector(state => state.pet.data[id] || []);
     const current = useSelector(state => state.user.current);
     const loading = useSelector(state => state.pet.loading);
-    const {name, background, avatar, type, gender, ages, followee, ownerId} = pet;
+    const amountOfPosts = useSelector(state => state.pet.post.length || []);
+
+    const {name, background, avatar, type, gender, ages, followee, ownerId, amountOfFollowers} = pet;
     const isOwner = current == ownerId
     const [editable, setEditable] = useState(false)
     useEffect(() => {
@@ -44,13 +47,20 @@ function Pet(props) {
                     receiver={ownerId}
                     onEdit={(value) => setEditable(value)}
                 />
-                <InfoAnnotation
-                    editable={editable}
-                    type={type}
-                    gender={gender}
-                    ages={ages}
-                    id={id}
-                />
+                <div className='info-annotation-section flex-column'>
+                    <AmountInfoBlock
+                        amountOfPosts={amountOfPosts}
+                        amountOfFollowers={amountOfFollowers}
+                    />
+                    <InfoAnnotation
+                        editable={editable}
+                        type={type}
+                        gender={gender}
+                        ages={ages}
+                        id={id}
+                    />
+                </div>
+
             </div>
             <PetFeed id={id} />
 

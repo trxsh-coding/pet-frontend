@@ -5,13 +5,16 @@ import {Provider} from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 import {store} from "./store";
 import {BrowserRouter} from "react-router-dom";
+import SocketProvider from "./Context/socketProvider";
 
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
-          <BrowserRouter>
-              <App />
-          </BrowserRouter>
+          <SocketProvider>
+              <BrowserRouter>
+                  <App />
+              </BrowserRouter>
+          </SocketProvider>
       </Provider>
   </React.StrictMode>,
   document.getElementById('root')

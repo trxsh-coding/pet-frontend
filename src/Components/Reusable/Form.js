@@ -11,7 +11,7 @@ export const ReusableForm = ({form, addStyles, onSubmit, primary, children, erro
         onSubmit(values)
     };
 
-    const [values, handleChange, handleSubmit] = useForm(form, onSubmitEvent);
+    const [values, handleChange, customStateChange, handleSubmit] = useForm(form, onSubmitEvent);
 
     const formStyle = {
         display:'flex',
@@ -44,9 +44,7 @@ export const ReusableForm = ({form, addStyles, onSubmit, primary, children, erro
         }
     }
     const inputList = _ => {
-        console.log(form)
         return Object.keys(form).map( el => {
-            console.log(el)
             return (
                 <div className='flex-column'>
                     <input type={calculateTypeOfField(el)}

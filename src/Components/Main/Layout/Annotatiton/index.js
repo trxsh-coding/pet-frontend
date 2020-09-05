@@ -11,10 +11,11 @@ import { Links } from "./links";
 
 //styles
 import '../style.scss'
+import {userActions} from "../../../../store/modules/user";
 
 const ImageWrapper = ({children, route, model, current, action, id}) => {
     const dispatch = useDispatch();
-    const onUpload = (route, model, id) => file => dispatch(action[UPDATE_PICTURE](file, route, model, id))
+    const onUpload = (route, model, id) => file => dispatch(userActions[UPDATE_PICTURE](file, route, model, id))
     return  current ? (
         <ReusableUpload action={onUpload(route, model, id)}>
             {children}

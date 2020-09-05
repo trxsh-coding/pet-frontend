@@ -6,7 +6,6 @@ import {postActions} from "../../../../store/modules/post";
 import {GET_BY_ID, GET_LIST} from "../../../../store/types";
 import ComponentWrapper from "../../../Reusable/ComponentWrapper";
 import PostAnnotation from "../Post/layout/Annotation";
-import {socket, socketioConnection} from "../../../../Utils/socket";
 
 
 
@@ -21,9 +20,9 @@ function Feed() {
         dispatch(postActions[GET_LIST](current))
     },[])
     const RenderFeed = _ => Object.values(posts).map( el => {
-        return (
+        return Object.values(posts).length ? (
             <PostAnnotation key={el.id} post={el}/>
-        )
+        ) : <span>Лента пока что пуста...</span>
     })
     return (
         <div className="Feed">

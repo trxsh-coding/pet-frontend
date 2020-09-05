@@ -16,7 +16,6 @@ function Registration() {
             })
 
     };
-    console.log(errors)
     const form = { email:'', username:'', password:'', passwordConfirm:''};
     const formStyle = {
         width:'300px'

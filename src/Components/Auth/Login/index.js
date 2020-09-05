@@ -17,7 +17,6 @@ function Login() {
             })
 
     };
-    console.log(errors)
     const form = { email:'', password:'' };
     const formStyle = {
         width:'300px'

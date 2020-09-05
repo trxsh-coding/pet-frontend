@@ -11,7 +11,7 @@ function Messages(props) {
 
     const id = props.match.params.id;
     const dispatch = useDispatch();
-
+    console.log(props)
     const chat = useSelector( s => s.chat.data[id] || {});
     const loading = useSelector( s => s.chat.loading);
     const current = useSelector( s => s.user.current);
@@ -21,8 +21,7 @@ function Messages(props) {
         if(!Object.keys(chat).length)  dispatch(chatActions[GET_BY_ID](id))
     }, [])
 
-    const receiver = Object.keys(chat).length ? chat.members.filter( el => el.id !== current )[0].user : {}
-    console.log(receiver)
+    const receiver = Object.keys(chat).length ? chat.members.filter( el => el.user.id !== current )[0].user : {}
     const membersById = _ => {
         if(Object.keys(chat).length){
             let map = {}
@@ -32,7 +31,6 @@ function Messages(props) {
             return map;
         }
     }
-    console.log(membersById())
     return !loading || Object.keys(chat).length?(
         <div className='message-container'>
             <MessageHeader user={receiver}/>
@@ -43,7 +41,7 @@ function Messages(props) {
                 receiver={receiver}
                 sender={currentUser}
             />
-            <MessageInput receiverId={receiver.id} senderId={current}/>
+            <MessageInput receiverId={receiver.id} senderId={current} chatId={id}/>
         </div>
     ) : <div className='transform-center'> <Spinner/> </div>
 }

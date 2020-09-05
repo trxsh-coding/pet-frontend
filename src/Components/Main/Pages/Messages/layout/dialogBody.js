@@ -1,19 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../style.scss'
 import ReusableImage from "../../../../Reusable/Image";
-import {socket} from "../../../../../Utils/socket";
+import SocketContext from "../../../../../Context/socketContext";
 function DialogBody(props) {
+    const socket = useContext(SocketContext)
     const {receiver, sender, current, members, messages} = props;
     useEffect(() => {
-        handleGettingMessage()
     },[])
-    function handleGettingMessage() {
-        socket.on('get-message', function(data){
-            console.log(data)
-            console.log('data')
-        });
 
-    }
     const RenderMessagesList = _ => messages ? messages.map( el => {
         const isReceiver = receiver.id === el.receiverId
         const messageBodyStyle = {
@@ -44,7 +38,7 @@ function DialogBody(props) {
         )
     }) : null
     return(
-        <div className='dialog-body'>
+        <div className='dialog-body flex-column'>
             <RenderMessagesList />
         </div>
     )
