@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import ReusableForm from "../../Reusable/Form";
 import { signIn } from "../../../store/modules/auth";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import '../style.scss'
-import history from "../../../services/history";
 
 function Login() {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState(null);
+    const history = useHistory();
     const login = async form => {
         const data = await dispatch(signIn(form))
             .then(callback => history.push("/"))

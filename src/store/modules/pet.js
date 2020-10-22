@@ -25,18 +25,34 @@ export const searchPet = query => async dispatch => {
 }
 
 export const followPet = id => async dispatch => {
-    const {data} = await api({URL:API_ROUTES.FOLLOW_PET(id), METHOD:'post'});
-    dispatch({
-        type: pet.actionTypes['UPDATE_FIELD'],
-        payload: {value : true, key : id, map:'data', field:'followee'},
-    });
+    try {
+        const {data} = await api({URL:API_ROUTES.FOLLOW_PET(id), METHOD:'post'});
+        dispatch({
+            type: pet.actionTypes['UPDATE_FIELD'],
+            payload: {value : true, key : id, map:'data', field:'followee'},
+        });
+        dispatch({
+            type: pet.actionTypes['CHANGE_QUANTITY'],
+            payload: {key : id, map:'data', field:'amountOfFollowers', type:'increase'},
+        });
+    }catch (e) {
+
+    }
 }
 export const unfollowPet = id => async dispatch => {
-    const {data} = await api({URL:API_ROUTES.UNFOLLOW_PET(id), METHOD:'delete'});
-    dispatch({
-        type: pet.actionTypes['UPDATE_FIELD'],
-        payload: {value : false, key : id, map:'data', field:'followee'},
-    });
+    try {
+        const {data} = await api({URL:API_ROUTES.UNFOLLOW_PET(id), METHOD:'delete'});
+        dispatch({
+            type: pet.actionTypes['UPDATE_FIELD'],
+            payload: {value : false, key : id, map:'data', field:'followee'},
+        });
+        dispatch({
+            type: pet.actionTypes['CHANGE_QUANTITY'],
+            payload: {key : id, map:'data', field:'amountOfFollowers', type:'decrease'},
+        });
+    }catch (e) {
+
+    }
 }
 
 export const createPet = form => async (dispatch) => {
@@ -64,6 +80,15 @@ export const createPet = form => async (dispatch) => {
     return res;
 };
 
+export const updatePet = (payload, id) => async (dispatch) => {
+    console.log(payload)
+    try {
+        const {data} = await api({URL:API_ROUTES.UPDATE_PET(id), METHOD:'patch', BODY:payload});
+        return 'success'
+    } catch (e) {
+
+    }
+};
 // POSTS
 
 

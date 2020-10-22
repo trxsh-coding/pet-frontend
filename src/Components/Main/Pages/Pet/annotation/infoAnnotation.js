@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../styles.scss'
 import {UPDATE_FIELD} from "../../../../../store/types";
 import {petActions} from "../../../../../store/modules/pet";
 import {useDispatch} from "react-redux";
 import editIcon from '../../../../../Assets/svg/edit.svg'
+import ResponsiveContext from "../../../../../Context/responsiveContext";
 
 
 function InfoAnnotation(props) {
@@ -28,10 +29,10 @@ function InfoAnnotation(props) {
             }
 
         </>
-
+    const mobile = useContext(ResponsiveContext)
     return (
-        <div className='flex-align-center mt-30 flex-align-stretch'>
-            <div className='info-annotation mr-30 summary'>
+        <div className='info-description-section flex-align-center mt-30 flex-align-stretch '>
+            <div className='info-annotation  summary'>
                 <div className='flex-column '>
                     <div>
                         <span className='font-16'>Общая информация</span>
@@ -55,6 +56,7 @@ function InfoAnnotation(props) {
 
                 </div>
             </div>
+            <div className={mobile ? 'hr' : ''}/>
             <div className='info-annotation additional'>
                 <div className='flex-column'>
                     <span className='font-16'>Дополнительная информация</span>

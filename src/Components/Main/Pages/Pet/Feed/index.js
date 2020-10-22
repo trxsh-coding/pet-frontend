@@ -25,7 +25,7 @@ function PetFeed(props) {
     })
 
     return (
-        <div className="PetFeed mt-60">
+        <div className="PetFeed ">
             <RenderShortPost/>
         </div>
     );

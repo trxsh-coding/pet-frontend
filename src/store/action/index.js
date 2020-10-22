@@ -66,10 +66,10 @@ export default class Actions {
         }
     }
 
-    [GET_LIST] = _ => async (dispatch) =>{
+    [GET_LIST] = (sortById = false) => async (dispatch) =>{
         this.setLoading(dispatch, true);
         try {
-            const {data} = await api({URL:`api/v1/${this.storeName}`});
+            let {data} = await api({URL:`api/v1/${this.storeName}`});
             dispatch({
                 type: this.reducerContext.actionTypes['APPEND'],
                 payload: data,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import ReusableImage from "../../../Reusable/Image";
 import ReusableUpload from "../../../Reusable/Upload";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,4 +25,4 @@ function PetAnnotation(props) {
 
 }
 
-export default withRouter(PetAnnotation);
+export default PetAnnotation;

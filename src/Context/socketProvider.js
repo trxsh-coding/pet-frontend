@@ -14,7 +14,7 @@ const SocketProvider = (props) => {
     const socketState = (
         {
             response: true,
-            endpoint: `http://127.0.0.1:8080?id=${id}`
+            endpoint: `${process.env.REACT_APP_MAIN_API}?id=${id}`
         }
     )
     let socket = null
@@ -23,15 +23,14 @@ const SocketProvider = (props) => {
              socket  = socketIOClient(socketState.endpoint, {
                  transports: ['websocket'],
              })
-            console.log('init')
-            dispatch(socketEventer(socket, 'get-message'))
             setValue(socket)
+            dispatch(socketEventer(socket, 'get-message'))
         }
     }
 
-    useEffect(() =>
-        initSocket(), [id]
-    );
+    useEffect(() => {
+        initSocket()
+    }, [id]);
     return(
         <SocketContext.Provider value={ value }>
             { props.children }

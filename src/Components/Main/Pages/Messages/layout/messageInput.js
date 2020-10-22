@@ -7,6 +7,7 @@ import '../style.scss'
 import SocketContext from "../../../../../Context/socketContext";
 import {useDispatch} from "react-redux";
 import {sendMessage} from "../../../../../store/modules/chat";
+import ReusableEmoji from "../../../../Reusable/Emoji";
 
 
 function MessageInput(props) {
@@ -23,7 +24,7 @@ function MessageInput(props) {
                 receiverId,
                 chatId
         }, socket))
-
+        setDescription('')
     }
     function onEmojiEnter() {
     }
@@ -46,13 +47,13 @@ function MessageInput(props) {
                 onChange={(e) => setDescription(e)}
                 action={() => onMessageSend()}
             />
-            <img
-                src={emoji}
-                width={20}
-                height={20}
-                onMouseOver={() => setVisible(true)}
-                onMouseLeave={() => onEmojiLeave()}
-            />
+            {/*<img*/}
+            {/*    src={emoji}*/}
+            {/*    width={20}*/}
+            {/*    height={20}*/}
+            {/*    onMouseOver={() => setVisible(true)}*/}
+            {/*    onMouseLeave={() => onEmojiLeave()}*/}
+            {/*/>*/}
         </div>
     )
 }

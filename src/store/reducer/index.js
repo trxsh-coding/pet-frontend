@@ -17,7 +17,8 @@ export default class Reducer {
             APPEND: 'APPEND',
             SET_LOADING: 'SET_LOADING',
             UPDATE_FIELD: 'UPDATE_FIELD',
-            APPEND_TO_CHILD: 'APPEND_TO_CHILD'
+            APPEND_TO_CHILD: 'APPEND_TO_CHILD',
+            CHANGE_QUANTITY: 'CHANGE_QUANTITY'
         }
     }
     _setActionPrefix(prefix, action) {
@@ -42,7 +43,8 @@ export default class Reducer {
             SET_BY_ID,
             SET_LOADING,
             UPDATE_FIELD,
-            APPEND_TO_CHILD
+            APPEND_TO_CHILD,
+            CHANGE_QUANTITY
         } = this.actionTypes;
 
         const {type, payload, key} = action;
@@ -92,6 +94,11 @@ export default class Reducer {
                     }
                 }
             }
+
+
+
+
+
             case UPDATE: {
                 const {_id, value, key} = payload;
                 state.data[_id] = {...state.data[_id], ...{[key]:value}};
@@ -109,6 +116,34 @@ export default class Reducer {
                         [key]:{
                             ...state[map][key],
                             [field]:value
+                        }
+                    }
+                }
+            }
+            case UPDATE_FIELD: {
+                const {key, value, map, field} = payload;
+                return  {
+                    ...state,
+                    [map]: {
+                        ...state[map],
+                        [key]:{
+                            ...state[map][key],
+                            [field]:value
+                        }
+                    }
+                }
+            }
+            case CHANGE_QUANTITY: {
+                const {key, map, field, type} = payload;
+                console.log(state[map][key][field])
+                return  {
+                    ...state,
+                    [map]: {
+                        ...state[map],
+                        [key]:{
+                            ...state[map][key],
+                            [field]:type === 'increase' ?
+                                state[map][key][field] + 1 : state[map][key][field] - 1
                         }
                     }
                 }

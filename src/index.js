@@ -6,14 +6,15 @@ import * as serviceWorker from './serviceWorker';
 import {store} from "./store";
 import {BrowserRouter} from "react-router-dom";
 import SocketProvider from "./Context/socketProvider";
+import ResponsiveProvider from "./Context/responsiveProvider";
 
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
           <SocketProvider>
-              <BrowserRouter>
+              <ResponsiveProvider>
                   <App />
-              </BrowserRouter>
+              </ResponsiveProvider>
           </SocketProvider>
       </Provider>
   </React.StrictMode>,

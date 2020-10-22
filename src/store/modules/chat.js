@@ -34,6 +34,7 @@ export const sendMessage = (payload, socket) => async (dispatch) => {
     const {data} = await api({URL:API_ROUTES.SEND_MESSAGE, METHOD:'POST', BODY: {
         receiverId:payload.receiverId,description:payload.description, chatId:payload.chatId
         }}, );
+    console.log(payload)
     socket.emit('private-message', payload)
     dispatch({
         type: chat.actionTypes['APPEND_TO_CHILD'],

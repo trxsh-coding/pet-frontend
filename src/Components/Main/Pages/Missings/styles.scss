@@ -1,0 +1,44 @@
+
+.missing-form {
+  flex: 0.9;
+  .location-block {
+    display: flex;
+    flex-direction: column;
+    flex:0.4;
+    .input__item {
+      width: 100%;
+    }
+    .location-search-input {
+     border: none;
+      height: 30px;
+      border-bottom: 1px solid #E5E5E5;
+      width: 100%;
+    }
+  }
+  .images-block {
+    flex: 0.6;
+    display: flex;
+    flex-wrap:wrap;
+    .upload-wrapper {
+      width: 165px;
+      height: 165px;
+      background: #C4C4C4;
+    }
+  }
+}
+
+@media only screen and (max-width: 780px)  {
+  .upload-wrapper {
+    width: 100% !important;
+    height: 365px;
+
+  }
+  .location-block {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .images-block {
+    flex-direction: column !important;
+    width: 100%;
+  }
+}

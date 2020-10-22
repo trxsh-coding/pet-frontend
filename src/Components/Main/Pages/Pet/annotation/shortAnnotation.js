@@ -17,4 +17,4 @@ function PetShortAnnotation(props) {
     );
 }
 
-export default withRouter(PetShortAnnotation);
+export default PetShortAnnotation;

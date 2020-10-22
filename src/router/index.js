@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Router, Route, withRouter, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 
 import Feed from "../Components/Main/Pages/Feed";
 import User from "../Components/Main/Pages/User";
@@ -9,21 +9,22 @@ import Chat from "../Components/Main/Pages/Chat";
 import Messages from "../Components/Main/Pages/Messages";
 import Search from "../Components/Main/Pages/Search";
 import PetCreation from "../Components/Main/Pages/PetCreation";
+import Notifications from "../Components/Main/Pages/Notifications";
 
 import Auth from "../Components/Auth";
 
 import Subscriptions from "../Components/Main/Pages/Subscriptions";
 import {PrivateRoute} from "./privateRoute";
-import history from "../services/history";
-import {Provider} from "react-redux";
-import {store} from "../store";
+import MissingAds from "../Components/Main/Pages/Missings";
+import { createBrowserHistory } from 'history';
+import RenderHeader from "../Components/Main/Layout/RenderHeader";
+import Missing from "../Components/Main/Pages/Missing";
 
 function Routing(props) {
-    console.log(props)
+    const history = createBrowserHistory();
     return (
-            <Provider store={store}>
                 <Router history={history}>
-                    <Switch>
+                    <RenderHeader />
                         <Route path ="/auth"  component={Auth}/>
                         <div className="container main-wrapper">
                             <PrivateRoute exact path='/' component={Feed} />
@@ -31,18 +32,18 @@ function Routing(props) {
                             <PrivateRoute exact path='/chat' component={Chat} />
                             <PrivateRoute path='/chat/room/:id' component={Messages} />
                             <PrivateRoute path='/add-pet' component={PetCreation} />
+                            <PrivateRoute path='/notifications' component={Notifications} />
+                            <PrivateRoute path='/missings' component={MissingAds} />
 
                             <Route  path='/user/:id' component={User} />
                             <Route  path='/pet/:id' component={Pet} />
                             <Route  path='/post/:id' component={Post} />
+                            <Route  path='/missing/:id' component={Missing} />
                             <Route  path='/search' component={Search} />
-
                         </div>
-                    </Switch>
                 </Router>
-            </Provider>
     )
 
 }
 
-export default withRouter(Routing)
+export default Routing

@@ -29,6 +29,16 @@ export const getUser = id => async (dispatch) => {
     });
 };
 
+export const updateUser = (payload) => async (dispatch) => {
+    console.log(payload)
+    try {
+        const {data} = await api({URL:API_ROUTES.UPDATE_USER, METHOD:'patch', BODY:payload});
+        return 'success'
+    } catch (e) {
+
+    }
+};
+
 export const getSubscriptions = _ =>async (dispatch) => {
     const {data} = await api({URL:API_ROUTES.GET_SUBSCRIPTIONS, METHOD:'get'});
     dispatch({

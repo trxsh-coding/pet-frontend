@@ -1,8 +1,7 @@
-import React, {useCallback, useState} from 'react';
-import history from "../../../../../services/history"
+import React, {useCallback, useContext, useState} from 'react';
 import '../styles.scss'
 import ReusableButton from "../../../../Reusable/Button";
-import {followPet, unfollowPet} from "../../../../../store/modules/pet";
+import {followPet, unfollowPet, updatePet} from "../../../../../store/modules/pet";
 import {useDispatch} from "react-redux";
 import {createRoom, getRoom, sendMessageWithRoom} from "../../../../../store/modules/chat";
 import ReusableModal from "../../../../Reusable/Modal";
@@ -11,10 +10,22 @@ import ReusableInput from "../../../../Reusable/Input";
 import cameraIcon from "../../../../../Assets/svg/camera.svg"
 import ReusableUpload from "../../../../Reusable/Upload";
 import ReusableImage from "../../../../Reusable/Image";
+import {useHistory} from 'react-router-dom'
 import {createPet} from "../../../../../store/modules/old/pet";
 import {createPost} from "../../../../../store/modules/post";
+import ResponsiveContext from "../../../../../Context/responsiveContext";
 function ButtonSection(props) {
-    const {current, id, followee, onEdit, editable, receiver} = props;
+    const {
+        current,
+        id,
+        followee,
+        onEdit,
+        editable,
+        receiver,
+        breed,
+        ages,
+        type
+    } = props;
     const dispatch = useDispatch()
     const [modal, setModal] = useState(false);
     const [description, setDescription] = useState(null);
@@ -24,6 +35,12 @@ function ButtonSection(props) {
         description:'',
         authorId:id
     })
+    const history = useHistory();
+    const mobile = useContext(ResponsiveContext);
+    const onPetUpdate = _ => {
+        const result = dispatch(updatePet({breed, type, ages}, id))
+        if(result) onEdit(false)
+    }
     const onWriteAction = _ => dispatch(getRoom(receiver))
         .then( e => {
             typeof e === 'string' ? setModal(true) : history.push(`/chat/room/${e.id}`)
@@ -57,9 +74,9 @@ function ButtonSection(props) {
         </div>
 
     return !current ? (
-        <div className='button-section mt-30'>
+        <div className='button-section mt-30 '>
             <ReusableModal visible={modal}
-                           height='350px'
+                           height='fit-content'
                            onClose={() => setModal(false)}
                            title='Написать сообщение'>
                 <div className='flex-column flex-align-stretch flex-1'>
@@ -99,15 +116,16 @@ function ButtonSection(props) {
                     <ReusableModal visible={modal}
                                    onClose={() => setModal(false)}
                                    height='fit-content'
+                                   styles={{position:'fixed', overflow:'hidden'}}
                                    title='Загрузка новой фотографии'>
-                        <div className='flex-column'>
-                            <div className='upload-wrapper flex-align-center flex-center relative mt-20'
+                        <div className={`${mobile ? 'flex-1' : ''} flex-column`}>
+                            <div className='upload-wrapper flex-align-center flex-center  mt-20 relative'
                                  style={{backgroundImage:"url("+url+")", backgroundSize:'cover', backgroundPosition:'center'}}
                             >
                                 <img src={cameraIcon} alt="camera-icon"/>
                                 <ReusableUpload withHover={false} action={(e) => {
                                     onFormChange(e, 'picture')
-                                    setUrl(URL.createObjectURL(e))
+                                    e ? setUrl(URL.createObjectURL(e)) : setUrl(null)
                                 }} />
                             </div>
                             {form.picture &&
@@ -133,8 +151,8 @@ function ButtonSection(props) {
                 </div>
 
                  :
-                <ReusableButton action={() => onEdit(false)}>
-                    Сохранить изменения
+                <ReusableButton action={() => onPetUpdate()}>
+                    Сохранить
                 </ReusableButton>
             }
         </div>

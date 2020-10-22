@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { withRouter } from 'react-router-dom'
 import ReusableButton from "../../../../Reusable/Button";
 import PetShortAnnotation from "../../Pet/annotation/shortAnnotation";
 import pet from "../../../../../Assets/svg/pet.svg";
@@ -56,4 +55,4 @@ function UserPets({pets, id, current, loading}) {
     );
 }
 
-export default withRouter(UserPets);
+export default UserPets;

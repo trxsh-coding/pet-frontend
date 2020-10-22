@@ -1,6 +1,5 @@
 import React from 'react';
 import ReusableImage from "../../../Reusable/Image";
-import { withRouter } from 'react-router-dom'
 import './styles.scss'
 
 function PetShortAnnotation(props) {
@@ -16,4 +15,4 @@ function PetShortAnnotation(props) {
     );
 }
 
-export default withRouter(PetShortAnnotation);
+export default PetShortAnnotation;

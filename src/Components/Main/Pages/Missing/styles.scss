@@ -1,0 +1,48 @@
+.missing-annotation {
+  padding: 20px 0;
+  border-bottom: 1px solid #C4C4C4;
+  .date {
+    color:#ABABAB;
+    font-size: 14px;
+  }
+  .reward {
+    color: #43B05C;
+  }
+}
+.missing-wrapper {
+  padding: 20px 100px;
+  .images-map {
+    img {
+      margin-bottom: 30px;
+      margin-right:30px;
+    }
+  }
+  .missing-map {
+  }
+}
+@media only screen and (max-width: 780px)  {
+  .missing-annotation {
+    padding: 16px;
+    .date, .reward {
+      text-align: end;
+    }
+  }
+  .missing-wrapper {
+    padding: 16px;
+    .missing-map {
+      margin-top: 20px;
+      width: 100%;
+    }
+    .missing-main-content {
+      flex-direction: column;
+    }
+    .buttons-block {
+      button {
+        margin-bottom: 20px;
+        &:last-of-type {
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+}

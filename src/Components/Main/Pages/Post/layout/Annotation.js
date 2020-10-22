@@ -8,6 +8,8 @@ import '../styles.scss'
 function PostAnnotation(props) {
     const {post} = props;
     const {authorId:author} = post;
+    const current = useSelector( s => s.user.current);
+
     const RenderComments = _ => {
         return post && post.comments ? (
             <div className="post-comments">
@@ -24,9 +26,17 @@ function PostAnnotation(props) {
                     date={post.date}
                     username={author.name}/>
                 <PostBody
+                    id={post.id}
+                    likes={post.likes}
                     picture={post.picture}
                     amountOfComments={post.comments ? post.comments.length : 0}
+                    amountOfLikes={post.amountOfLikes}
                     description={post.description}
+                    likeId={post.likeId}
+                    petOwnerId={post.authorId.ownerId}
+                    petId={post.authorId.id}
+                    isPostCreator={current === post.authorId._id}
+
                 />
             </div>
             <RenderComments />

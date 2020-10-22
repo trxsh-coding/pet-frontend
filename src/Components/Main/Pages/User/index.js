@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import { withRouter } from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
 import {getUser, userActions} from "../../../../store/modules/user";
 import Annotation from "../../Layout/Annotatiton";
@@ -14,6 +13,8 @@ function User(props) {
     const user = useSelector(s => s.user.data[id] || {});
     const loading = useSelector(s => s.user.loading);
     const current = useSelector(s => s.user.current == id );
+    const currentId = useSelector(s => s.user.current );
+
     const {pets} = useSelector(s => s.user.data[id] || []);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -28,9 +29,18 @@ function User(props) {
                         current={current}
                         id={user._id}
             />
-            <UserInfoSection current={current} pets={user.pets} />
+            <UserInfoSection
+                current={current}
+                currentId={currentId}
+                pets={user.pets}
+                phone={user.phone}
+                city={user.city}
+                online={user.online}
+                lastSeen={user.lastSeen}
+                about={user.about}
+            />
         </div>
     );
 }
 
-export default withRouter(User);
+export default User;

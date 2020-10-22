@@ -1,24 +1,25 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import ComponentWrapper from "../../../Reusable/ComponentWrapper";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import Spinner from "../../../Reusable/Spinner";
-import history from "../../../../services/history";
+import {useHistory} from 'react-router-dom';
 import {searchPet} from "../../../../store/modules/pet";
 import ReusableImage from "../../../Reusable/Image";
 import Aside from "../../Layout/Aside";
-import './style.scss'
 import SearchInput from "./layout/searchInput";
+import ResponsiveContext from "../../../../Context/responsiveContext";
+import './style.scss'
+
 function Search(props) {
-    console.log(history)
     const dispatch = useDispatch();
-    const query = history.location.state;
-    function initialize(query) {
-        if(query) dispatch(searchPet(query))
+    const history = useHistory();
+    const [value, setValue] = useState(history.location.state)
+    const [query, setQuery] = useState('name')
+    function initialize(value) {
+        if(value) dispatch(searchPet({[query] : value}))
     }
-    const [value, setValue] = useState(Object.keys[query])
     useEffect(() => {
-        initialize(query)
-    }, [])
+        initialize(value)
+    }, [query])
     const RenderPetMap = () => {
         const search = useSelector( s => s.pet.search || []);
         const pets = useSelector( s => s.pet.data || []);
@@ -30,33 +31,36 @@ function Search(props) {
                      key={el}
                      onClick={() => history.push(`/pet/${pet.id}`)}
                 >
-                    <ReusableImage size={165} rounded fromServer link={pet.avatar}/>
+                    <ReusableImage size={mobile ? 100 : 165} rounded fromServer link={pet.avatar}/>
                     <span className='mt-10'> {pet.name}</span>
                 </div>
             )
         })
     }
-    const onSetAction = useCallback( (e) => {
-    }, [])
+    console.log(query)
     const map = {
         name:'Имя',
-        type:'Порода'
+        breed:'Порода'
     }
-    const RenderAside = useMemo(() =>
+
+    const mobile = useContext(ResponsiveContext)
+    return (
+        <div className={`Search ${mobile ? 'flex-column-reverse' : 'flex'}`}>
+            <ComponentWrapper title='Поиск' width={878}>
+                <div className={mobile ? 'wrapper-space' : ''}>
+                    <SearchInput  value={value} action={(e) => initialize(e)} />
+                    <div className='flex items-container mt-20'><RenderPetMap /></div>
+                </div>
+            </ComponentWrapper>
             <Aside
-                action={(e) => onSetAction(e)}
+                action={(e) => {
+                    setQuery(e)
+                    setValue('')
+                }}
                 map={map}
             />
-    , [])
-    return (
-        <div className="Chat flex">
-            <ComponentWrapper title='Поиск' width={878}>
-                <SearchInput value={value} action={(e) => initialize(e)} />
-                <div className='flex items-container mt-20'><RenderPetMap /></div>
-            </ComponentWrapper>
-
-            {RenderAside}
         </div>
+
     )
 }
 

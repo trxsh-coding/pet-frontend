@@ -7,7 +7,6 @@ import ButtonSection from "./annotation/buttonSection";
 import {GET_BY_ID} from "../../../../store/types";
 import Spinner from "../../../Reusable/Spinner";
 import PetFeed from "./Feed";
-import history from "../../../../services/history";
 import AmountInfoBlock from "./annotation/amountInfoBlock";
 import './styles.scss'
 function Pet(props) {
@@ -17,9 +16,20 @@ function Pet(props) {
     const pet = useSelector(state => state.pet.data[id] || []);
     const current = useSelector(state => state.user.current);
     const loading = useSelector(state => state.pet.loading);
-    const amountOfPosts = useSelector(state => state.pet.post.length || []);
+    const amountOfPosts = useSelector(state => state.pet.post.length || 0);
 
-    const {name, background, avatar, type, gender, ages, followee, ownerId, amountOfFollowers} = pet;
+    const {
+        name,
+        background,
+        avatar,
+        type,
+        gender,
+        ages,
+        followee,
+        ownerId,
+        amountOfFollowers,
+        breed
+    } = pet;
     const isOwner = current == ownerId
     const [editable, setEditable] = useState(false)
     useEffect(() => {
@@ -38,9 +48,13 @@ function Pet(props) {
                 action={petActions}
                 current={current}
             />
-            <div className="pet-bottom-section flex mt-40 flex-between">
+            <div className="pet-bottom-section flex pt-40 flex-between ">
                 <ButtonSection
                     id={id}
+                    type={type}
+                    gender={gender}
+                    ages={ages}
+                    breed={breed}
                     followee={followee}
                     current={isOwner}
                     editable={editable}
@@ -57,6 +71,7 @@ function Pet(props) {
                         type={type}
                         gender={gender}
                         ages={ages}
+                        breed={breed}
                         id={id}
                     />
                 </div>

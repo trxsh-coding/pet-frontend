@@ -1,6 +1,6 @@
 import React from 'react';
 import bg from '../../Assets/img/auth-bg.jpeg'
-import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Login from './Login'
 import Registration from './Registration'
 import './style.scss'
@@ -15,12 +15,10 @@ function Auth() {
     return (
         <div className="Auth" style={backgroundStyle}>
             <div className='overlay'/>
-                <Switch>
-                    <Route  path ="/auth/login"   component={Login}/>
-                    <Route  path ="/auth/registration"  component={Registration}/>
-                </Switch>
+            <Route exact strict path ="/auth/login"   component={Login}/>
+            <Route exact strict path ="/auth/registration"  component={Registration}/>
         </div>
     );
 }
 
-export default withRouter(Auth);
+export default Auth;

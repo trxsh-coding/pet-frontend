@@ -21,6 +21,7 @@ function PetCreation(props) {
                         id={user._id}
             />
             <CreationBody current={current}/>
+
         </div>
     )
 }

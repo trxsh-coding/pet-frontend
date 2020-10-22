@@ -5,10 +5,11 @@ import {normalizeTime} from "../../../../../Utils/timestamp";
 import ReusableInput from "../../../../Reusable/Input";
 import {useDispatch} from "react-redux";
 import {createComment} from "../../../../../store/modules/post";
-import history from "../../../../../services/history";
+import {useHistory} from 'react-router-dom'
 function PostComments(props) {
     const {comments, id} = props;
     const dispatch = useDispatch()
+    const history = useHistory()
     const [comment, setComment] = useState('');
     const onCommentSaved = async () => {
         await dispatch(createComment({
@@ -19,13 +20,15 @@ function PostComments(props) {
     }
     const RenderComments = _ => comments.map( comment => {
         return (
-            <div className='flex-between comment-block mb-15'>
-                <div className="comment-info-block ">
-                    <span onClick={() => history.push(`/user/${comment.author._id}`)} className='comment-username'>{comment.author.username} </span>
-                    <span className='comment-description'>{comment.description}</span>
+            <>
+                <div className='flex-between comment-block mb-15'>
+                    <div className="comment-info-block ">
+                        <span onClick={() => history.push(`/user/${comment.author._id}`)} className='comment-username'>{comment.author.username} </span>
+                        <span className='comment-description'>{comment.description}</span>
+                    </div>
+                    <span className='timestamp'>{normalizeTime(comment.date)}</span>
                 </div>
-                <span className='timestamp'>{normalizeTime(comment.date)}</span>
-            </div>
+            </>
         )
     })
 

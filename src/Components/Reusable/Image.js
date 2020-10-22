@@ -1,7 +1,15 @@
 import React from 'react'
 
 const ReusableImage = (props) => {
-    const {size, width, height, rounded, link = '', fromServer = false, styles} = props;
+    const {
+        size,
+        width,
+        height,
+        rounded,
+        link = '',
+        fromServer = false,
+        styles,
+    } = props;
     const imageStyle = {
         backgroundColor:'#BDBDBD',
         width: size ? size : width,

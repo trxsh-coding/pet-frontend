@@ -1,10 +1,10 @@
 import React from 'react'
 
-const ReusableButton = ({children, styles, action, submit}) => {
+const ReusableButton = ({children, styles, action, submit, secondaryStyle = false}) => {
     const buttonStyle = {
-        backgroundColor: '#4A76A8',
+        backgroundColor: secondaryStyle ? '#ffffff' : '#4A76A8',
         padding:'8px 6px',
-        border:'none',
+        border: secondaryStyle ? '0.5px solid #4A76A8' :'none',
         borderRadius:'5px',
         color:'#ffffff',
         minWidth:'120px',
@@ -14,7 +14,7 @@ const ReusableButton = ({children, styles, action, submit}) => {
 
     return (
         <button onClick={action} style={buttonStyle}>
-            <span style={{fontWeight:"normal", color:'#ffffff'}}>{children}</span>
+            <span style={{fontWeight:"normal", color: secondaryStyle ? '#4A76A8' : '#ffffff'}}>{children}</span>
         </button>
     )
 };

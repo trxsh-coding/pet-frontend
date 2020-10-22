@@ -6,6 +6,8 @@ import user from "../store/modules/user"
 import pet from "./modules/pet"
 import post from "./modules/post";
 import chat from "./modules/chat";
+import notification from "./modules/notifications";
+import missing from "./modules/missings";
 
 const middleware = applyMiddleware(thunk);
 
@@ -14,7 +16,9 @@ export const rootReducer = combineReducers({
     user,
     pet,
     post,
-    chat
+    chat,
+    notification,
+    missing
 });
 export const store = createStore(rootReducer, composeWithDevTools(middleware));
 

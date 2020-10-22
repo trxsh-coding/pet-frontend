@@ -65,10 +65,7 @@ const ReusableInput = (props) => {
                     onKeyPress={onKeyPressAction}
                 />
             }
-            {children ?
-                <div onClick={() => action()}><RenderChildrenIcon/></div> :
-                children
-            }
+            <div onClick={() => action()}><RenderChildrenIcon/> </div>
         </div>
     )
 };

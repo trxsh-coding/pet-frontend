@@ -3,25 +3,33 @@ import ReusableButton from "../../../../Reusable/Button";
 import '../styles.scss'
 import ReusableImage from "../../../../Reusable/Image";
 import ReusableModal from "../../../../Reusable/Modal";
-import history from "../../../../../services/history";
 import settingsIcon from '../../../../../Assets/svg/settings.svg'
 import editIcon from '../../../../../Assets/svg/edit.svg'
+import {useDispatch} from "react-redux";
+import {useHistory} from 'react-router-dom'
+import {updateUser, userActions} from "../../../../../store/modules/user";
+import {petActions} from "../../../../../store/modules/pet";
+import {UPDATE_FIELD} from "../../../../../store/types";
+import {normalizeTime} from "../../../../../Utils/timestamp";
 function UserInfoSection(props) {
-    const {current, city, pets, phone} = props;
+    const {current, city='', pets, phone='', currentId, online, lastSeen, about} = props;
     const [visible, setVisible] = useState(false)
     const [editable, setEditable] = useState(false)
-
+    const [focus, setFocus] = useState(null);
+    const dispatch = useDispatch()
+    const history = useHistory()
     function onUpdate() {
-
+        dispatch(updateUser({city, phone, about}, currentId))
         setEditable(false)
-
     }
 
     const RenderUserButton = _ => current ?
         <RenderEditButton /> :
         <ReusableButton>Написать</ReusableButton>
     const PetList = _ => pets.map( el => {
-        console.log(el)
+        return (
+            <RenderPetBlock pet={el} />
+        )
     })
 
     const EditButton = _ => (
@@ -46,7 +54,7 @@ function UserInfoSection(props) {
     const RenderPetBlock = ({pet})=> {
         const {avatar} = pet;
         return (
-                <div className=' flex-align-center mt-20'>
+                <div className=' flex-align-center mt-20' onClick={() => history.push(`/pet/${pet.id}`)}>
                     <ReusableImage link={avatar} rounded size={40} fromServer/>
                     <span className='pl-15 light-weight font-16'>{pet.name}</span>
                 </div>
@@ -54,21 +62,35 @@ function UserInfoSection(props) {
     }
     const RenderAboutSection = _ => {
         return (
-            <div className='body-wrapper about-section ml-30 mt-50'>
-
+            <div className=' about-section  '>
+                <span>Дополнительная информация</span>
+                {!editable ?
+                    <div className='mt-20'><span>{about}</span></div> :
+                    <div>
+                        <EditInput value={about} field={'about'}/>
+                    </div>
+                }
             </div>
         )
     }
-
-    const EditInput = ({value}) => {
+    const RenderOnlineBlock = _ => online ? <span style={{fontWeight:500, color:'#5dbb5d'}}>В сети</span> : <span>{normalizeTime(lastSeen)}</span>
+    const onFieldUpdate = (value, field) => {
+        setFocus(field)
+        dispatch(userActions[UPDATE_FIELD]({value:value, key:currentId, map:'data', field:field}))
+    }
+    const EditInput = ({value, field}) => {
         return (
             <>
-                <input type='text' value={value}/>
+                <input
+                       autoFocus={focus === field}
+                       value={value}
+                       onChange={(e) => onFieldUpdate(e.target.value, field)}
+                />
                 <img src={editIcon} alt="edit-icon"/>
             </>
         )
     }
-    const RenderInfoBlock = ({value}) => editable ? <EditInput value={value} /> : <span>{value}</span>
+    const RenderInfoBlock = ({value, field}) => editable ? <EditInput value={value} field={field}/> : <span>{value}</span>
     const PetModalList = _ => pets.map(el => (
        <div className='flex-align-center flex-column flex-between pointer' onClick={() => history.push(`/pet/${el.id}`)}>
            <ReusableImage link={el.avatar} size={100} rounded fromServer/>
@@ -112,17 +134,20 @@ function UserInfoSection(props) {
         )
     }
     return (
-        <div className='flex'>
+        <div className='user-info-section '>
             <div className='user-info mt-95 flex-column flex-align-center mr-50'>
                 <RenderUserButton />
                 <div className='flex-align-center mt-20'>
                     <span className=''>Город:</span>
-                    <RenderInfoBlock value={city}/>
+                    <RenderInfoBlock value={city} field={'city'}/>
 
                 </div>
                 <div className='flex-align-center mt-20'>
                     <span >Телефон:</span>
-                    <RenderInfoBlock value={phone}/>
+                    <RenderInfoBlock value={phone} field={'phone'}/>
+                </div>
+                <div className='flex-align-center mt-20'>
+                    <RenderOnlineBlock />
                 </div>
             </div>
             <RenderAddPetBlock />

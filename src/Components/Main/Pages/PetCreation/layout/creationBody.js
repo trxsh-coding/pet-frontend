@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ReusableUpload from "../../../../Reusable/Upload";
 import '../style.scss'
 import useForm from "../../../../../CustomHooks/useForm";
@@ -7,11 +7,13 @@ import {translateKeyword} from "../../../../../Constants";
 import ReusableCheckbox from "../../../../Reusable/Checkbox";
 import ReusableImage from "../../../../Reusable/Image";
 import {createPet} from "../../../../../store/modules/old/pet";
+import {useHistory} from 'react-router-dom'
 import {useDispatch} from "react-redux";
-import history from "../../../../../services/history";
+import ResponsiveContext from "../../../../../Context/responsiveContext";
 function CreationBody(props) {
     const {current} = props;
     const dispatch = useDispatch();
+    const history = useHistory();
    async function onSubmitEvent() {
        const result = await dispatch(createPet({...values, ...{ownerId:current}}));
        history.push(`/pet/${result}`)
@@ -19,6 +21,7 @@ function CreationBody(props) {
     }
     const form = { name:'', ages:'', breed:'', type:'', gender:'', avatar:''}
     const [values, handleChange, customStateChange, handleSubmit] = useForm(form, onSubmitEvent);
+   const mobile = useContext(ResponsiveContext)
     const [imageUrl, setUrl] = useState(null);
     const InputList = _ => Object.keys(form).map( el => {
         return el !== 'gender' && el !== 'avatar' && (
@@ -39,14 +42,7 @@ function CreationBody(props) {
          customStateChange({key:'avatar', value: e})
 
     }
-    const RenderPictureBlock = _ => {
-        return (
-            <div  className='add-picture-block relative mt-30'>
-                <ReusableImage size={130} rounded link={imageUrl}/>
-                <ReusableUpload  action={(e) => onUpload(e)} getUrl={(e) => console.log(e)}/>
-            </div>
-        )
-    }
+
     const CheckBoxList = _ => (
         <div>
             <span className='mb-10 font-16 light-weight'>Пол:</span>
@@ -69,8 +65,8 @@ function CreationBody(props) {
         </div>
     )
     return (
-        <div className='body-wrapper mt-60 mb-100'>
-            <form onSubmit={handleSubmit}>
+        <div className='body-wrapper mt-60 '>
+            <form onSubmit={handleSubmit} className='creation-form'>
                 <div>
                     <span>Добавить питомца</span>
                 </div>
@@ -85,7 +81,7 @@ function CreationBody(props) {
                 </div>
                 <div className='mt-40 ' >
                     <span className='font-16 '>Личное:</span>
-                    <div className='flex flex-align-center mt-20'>
+                    <div className={`${mobile ? 'flex-column' : 'flex'} flex-align-center mt-20`}>
                         {InputList()}
                         {CheckBoxList()}
                     </div>

@@ -28,10 +28,12 @@ export const ROUTE_NAMES = Object.freeze({
        REGISTRATION:'registration',
    },
    MAIN: {
-       FEED:'Лента',
+       '/':'Лента',
+       MISSINGS:'Объявления',
        SUBSCRIPTIONS:'Подписки',
        SEARCH:'Поиск',
-       NOTIFICATIONS:'Уведомления'
+       NOTIFICATIONS:'Уведомления',
+       CHAT:'Сообщения',
    }
 });
 
@@ -82,6 +84,22 @@ export const API_ROUTES = Object.freeze({
     GET_USER : (id) =>  `api/v1/user/${id}`,
     /**
      * @description get current user status, GET request
+     * @param none
+     * @returns {boolean}
+     */
+
+
+    UPDATE_USER : `api/v1/user/updateCurrentUser`,
+    /**
+     * @description get current user, PATCH request
+     * @param id
+     * @returns {boolean}
+     */
+
+
+    UPDATE_PET:  (id) =>  `api/v1/pet/${id}`,
+    /**
+     * @description update pet, PATCH request
      * @param none
      * @returns {boolean}
      */
@@ -174,6 +192,57 @@ export const API_ROUTES = Object.freeze({
      * @returns {object}
      * @param none
      */
-    SEND_MESSAGE_WITH_ROOM : `api/v1/message/room`
+    SEND_MESSAGE_WITH_ROOM : `api/v1/message/room`,
 
+    /**
+     * @description send message with room action, POST request
+     * @returns {object}
+     * @param none
+     */
+    LOGOUT : `api/v1/user/logout`,
+
+    /**
+     * @description user login in, POST request
+     * @returns {object}
+     * @param id
+     */
+
+
+    GET_NOTIFICATIONS_COUNT : `api/v1/notification/count`,
+
+    /**
+     * @description user login in, POST request
+     * @returns {object}
+     * @param id
+     */
+
+
+    READ_NOTIFICATIONS : `api/v1/notification/read`,
+
+
+    /**
+     * @description create like, POST request
+     * @returns {object}
+     * @param id
+     */
+
+
+    CREATE_LIKE : (id) => `api/v1/like/${id}`,
+
+    /**
+     * @description delete like, DELETE request
+     * @returns {string}
+     * @param id
+     */
+
+
+    DELETE_LIKE : (id) => `api/v1/like/${id}`,
+
+    /**
+     * @description create missing adv, POST request
+     * @returns {object}
+     * @param none
+     */
+
+    CREATE_MISSING : `api/v1/missing/`,
 })

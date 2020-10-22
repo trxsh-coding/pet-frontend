@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './reusable.scss'
 import close from '../../Assets/svg/Close.svg'
+import ResponsiveContext from "../../Context/responsiveContext";
 const ReusableModal = (props) => {
+    const mobile = useContext(ResponsiveContext)
     const {
         children,
         styles,
@@ -9,7 +11,7 @@ const ReusableModal = (props) => {
         title,
         visible,
         height ='661px',
-        width = '945px'
+        width = mobile? '100%' : '945px'
     } = props;
     const windowStyle = {
         width:width,
@@ -25,7 +27,9 @@ const ReusableModal = (props) => {
            <div className="modal-window flex-column" style={windowStyle}>
                <div className="modal-header">
                    <img src={close} width='25px' height='25px' alt='close' className='header-close-icon pointer' onClick={onClose}/>
-                   <span className='pl-10 flex-center'>{title}</span>
+                   {!mobile &&
+                        <span className='pl-10 flex-center'>{title}</span>
+                   }
                </div>
                <div className="modal-child">
                    {children}

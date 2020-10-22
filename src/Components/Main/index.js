@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch, withRouter, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import {useSelector} from "react-redux";
 import User from "./Pages/User";
 import Pet from "./Pages/Pet";
@@ -26,4 +26,4 @@ function Main(props) {
     );
 }
 
-export default withRouter(Main);
+export default Main;

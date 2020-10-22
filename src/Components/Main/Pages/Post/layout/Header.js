@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import ReusableImage from "../../../../Reusable/Image";
 import {normalizeTime} from "../../../../../Utils/timestamp";
 import '../styles.scss'
-import history from "../../../../../services/history";
+import {useHistory} from 'react-router-dom'
 function PostHeader(props) {
     const {link, date, id, username} = props;
+    const history = useHistory()
     function onRouterPush() {
         history.push(`/pet/${id}`)
     }
