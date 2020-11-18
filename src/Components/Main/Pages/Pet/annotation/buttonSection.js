@@ -5,15 +5,13 @@ import {followPet, unfollowPet, updatePet} from "../../../../../store/modules/pe
 import {useDispatch} from "react-redux";
 import {createRoom, getRoom, sendMessageWithRoom} from "../../../../../store/modules/chat";
 import ReusableModal from "../../../../Reusable/Modal";
-import ReusableForm from "../../../../Reusable/Form";
 import ReusableInput from "../../../../Reusable/Input";
 import cameraIcon from "../../../../../Assets/svg/camera.svg"
 import ReusableUpload from "../../../../Reusable/Upload";
-import ReusableImage from "../../../../Reusable/Image";
 import {useHistory} from 'react-router-dom'
-import {createPet} from "../../../../../store/modules/old/pet";
 import {createPost} from "../../../../../store/modules/post";
 import ResponsiveContext from "../../../../../Context/responsiveContext";
+import PostCreation from "./PostCreation";
 function ButtonSection(props) {
     const {
         current,
@@ -24,7 +22,8 @@ function ButtonSection(props) {
         receiver,
         breed,
         ages,
-        type
+        type,
+        authorId
     } = props;
     const dispatch = useDispatch()
     const [modal, setModal] = useState(false);
@@ -61,18 +60,6 @@ function ButtonSection(props) {
         const result =  await dispatch(sendMessageWithRoom({receiver, description }))
         if(result) setModal(false)
     }
-    const RenderModalDialog = _ => url ?
-        <div className='upload-wrapper flex-align-center flex-center relative'
-             style={{backgroundImage:"url("+url+")", backgroundSize:'cover'}}>
-            <img src={cameraIcon} alt="camera-icon"/>
-            <ReusableUpload withHover={false} action={(e) => setUrl(URL.createObjectURL(e))} />
-        </div> :
-        <div>
-            <div className='relative'>
-                <ReusableImage link={url} width={555} height={400}/>
-            </div>
-        </div>
-
     return !current ? (
         <div className='button-section mt-30 '>
             <ReusableModal visible={modal}
@@ -110,9 +97,7 @@ function ButtonSection(props) {
                     <ReusableButton action={() => onEdit(true)}>
                         Редактировать
                     </ReusableButton>
-                    <div className='create-post-button flex-align-center mt-30 pointer' onClick={() => setModal(true)}>
-                        <img src={cameraIcon} alt="camera-icon"/> <span className='pl-15'>Добавить фотографии</span>
-                    </div>
+                    <PostCreation authorId={authorId}/>
                     <ReusableModal visible={modal}
                                    onClose={() => setModal(false)}
                                    height='fit-content'

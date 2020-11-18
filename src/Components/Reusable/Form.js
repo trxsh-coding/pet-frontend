@@ -35,7 +35,8 @@ export const ReusableForm = ({form, addStyles, onSubmit, primary, children, erro
     };
     const calculateTypeOfField = type => {
         switch (type) {
-            case 'password' || 'passwordConfirm' :
+            case 'password':
+            case 'passwordConfirm':
                 return 'password'
             case 'description':
                 return 'textarea'

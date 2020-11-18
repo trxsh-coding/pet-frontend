@@ -22,7 +22,7 @@ function ModalLikes({visible, likes, action}) {
     return (
         <div>
             <ReusableModal
-                title='Питомцы'
+                title='Понравилось'
                 visible={visible}
                 rounded
                 styles={{position:'fixed'}}

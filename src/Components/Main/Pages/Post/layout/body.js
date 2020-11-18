@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {createLike, deleteLike} from "../../../../../store/modules/like";
 import ResponsiveContext from "../../../../../Context/responsiveContext";
 import ModalLikes from "./modalLikes";
+import ReusablePlayer from "../../../../Reusable/VideoPlayer";
 function PostBody(props) {
     const {
         description,
@@ -20,16 +21,29 @@ function PostBody(props) {
         petOwnerId,
         petId,
         isPostCreator,
-        likes
+        likes,
+        content
     } = props;
 
     const dispatch = useDispatch()
     const mobile = useContext(ResponsiveContext)
     const [visible, setVisible] = useState(false);
+    console.log(isPostCreator)
     function onPressLikeAction() {
-        if(isPostCreator) dispatch(createLike(id, petOwnerId, petId))
-        else setVisible(true)
+        if(likeId !== null) dispatch(deleteLike(id, likeId))
+        else if(!isPostCreator) dispatch(createLike(id, petOwnerId, petId))
+        else if(isPostCreator && Object.values(likes).length) setVisible(true)
     }
+
+    const RenderContent = _ => {
+        return content.contentType === 'video' ? (
+            <ReusablePlayer publicId={content.publicId}/>
+        ) :
+            (
+                <ReusableImage width={!mobile ? 653 : '100%'} height={mobile ? 288 : 500} fromServer link={content}/>
+            )
+    }
+
     return (
         <div className='post-body mt-12 '>
             <ModalLikes
@@ -37,7 +51,7 @@ function PostBody(props) {
                 action={() => setVisible(false)}
                 likes={likes}
             />
-            <ReusableImage width={!mobile ? 653 : '100%'} height={mobile ? 288 : 500} fromServer link={picture}/>
+            <RenderContent />
             <div className='flex-align-center icons-block'>
                 {likeId ?
                     <div className='flex-align-center mr-20'>

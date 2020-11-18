@@ -59,6 +59,7 @@ function Pet(props) {
                     current={isOwner}
                     editable={editable}
                     receiver={ownerId}
+                    authorId={id}
                     onEdit={(value) => setEditable(value)}
                 />
                 <div className='info-annotation-section flex-column'>

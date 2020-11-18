@@ -9,6 +9,7 @@ const ReusableInput = (props) => {
         action,
         onChange,
         value,
+        key,
         type='input',
         placeholder='Описание',
         background='#f2f2f2',
@@ -57,6 +58,7 @@ const ReusableInput = (props) => {
                 defaultValue=""
             /> :
                 <input
+                    key={key}
                     style={{background:background}}
                     onChange={(e) => onChange(e.target.value)}
                     className='reusable-input'

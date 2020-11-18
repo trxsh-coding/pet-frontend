@@ -20,7 +20,7 @@ function PetFeed(props) {
 
     const RenderShortPost = _ => petFeed.map(el => {
         return petFeed && petFeed.length && (
-            <ShortPost picture={el.picture} key={el._id} id={el._id}/>
+            <ShortPost content={el.content} key={el._id} id={el._id}/>
         )
     })
 

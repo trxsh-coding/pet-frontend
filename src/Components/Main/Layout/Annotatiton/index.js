@@ -17,15 +17,18 @@ import ResponsiveContext from "../../../../Context/responsiveContext";
 
 const ImageWrapper = ({children, route, model, current, action, id}) => {
     const dispatch = useDispatch();
-    const onUpload = (route, model, id) => file => {
+    async function onUpload(props) {
+        const {file, route, model, id} = props;
         const isPetRoute = history.location.pathname.includes('pet')
         isPetRoute ?
-            dispatch(petActions[UPDATE_PICTURE](file, route, model, id)) :
-            dispatch(userActions[UPDATE_PICTURE](file, route, model, id))
-
+            await dispatch(petActions[UPDATE_PICTURE](file, route, model, id)) :
+            await dispatch(userActions[UPDATE_PICTURE](file, route, model, id))
     }
     return  current ? (
-        <ReusableUpload action={onUpload(route, model, id)}>
+        <ReusableUpload
+            action={ (file) => onUpload({route, model, id, file})}
+            type={route}
+        >
             {children}
         </ReusableUpload>
     ) : <div> {children} </div>

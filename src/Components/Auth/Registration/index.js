@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import ReusableForm from "../../Reusable/Form";
 import { signUp} from "../../../store/modules/auth";
 import { useDispatch } from "react-redux";
-import history from "../../../services/history";
+import { useHistory } from "react-router-dom";
 
 
 function Registration() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [errors, setErrors] = useState(null)
     const registration = async form => {
         const data = await dispatch(signUp(form))

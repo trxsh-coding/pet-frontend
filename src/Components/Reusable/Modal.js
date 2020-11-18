@@ -11,7 +11,8 @@ const ReusableModal = (props) => {
         title,
         visible,
         height ='661px',
-        width = mobile? '100%' : '945px'
+        width = mobile? '100%' : '945px',
+        wrapperStyle
     } = props;
     const windowStyle = {
         width:width,
@@ -21,8 +22,9 @@ const ReusableModal = (props) => {
         zIndex:100,
         ...styles,
     };
+
     return visible ? (
-       <div className='modal-wrapper'>
+       <div className='modal-wrapper' style={wrapperStyle}>
            <div className='modal-overlay' onClick={onClose}/>
            <div className="modal-window flex-column" style={windowStyle}>
                <div className="modal-header">

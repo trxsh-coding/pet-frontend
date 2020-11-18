@@ -41,6 +41,7 @@ function MissingAds(props) {
         <ComponentWrapper title='Доска объявлений' withActionButton action={() => setModal(true)}>
             <ReusableModal visible={modal}
                            height='fit-content'
+                           styles={{position:'absolute'}}
                            onClose={() => setModal(false)}
                            title='Создание объявления' >
                 <MissingCreateForm />

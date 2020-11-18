@@ -39,20 +39,35 @@ export const createComment = body => async (dispatch) => {
 
 export const createPost = form => async (dispatch) => {
     const formData = new FormData();
-
+    console.log(form)
     for (let key in form){
         formData.append(key, form[key])
     }
 
     try {
-        const {data} = await api({URL:API_ROUTES.CREATE_POST, METHOD:'post', BODY:formData});
-        dispatch({
-            type: post.actionTypes['APPEND'],
-            payload: {
-                [data.id] : data
-            }
-        });
-        return data.id;
+
+        if(form.type === 'video'){
+            const {data} = await api({URL:API_ROUTES.CREATE_VIDEO_POST, METHOD:'post', BODY:form});
+            console.log(data)
+            dispatch({
+                type: post.actionTypes['APPEND'],
+                payload: {
+                    [data.id] : data
+                }
+            });
+            return data.id;
+        } else {
+            const {data} = await api({URL:API_ROUTES.CREATE_POST, METHOD:'post', BODY:formData});
+            dispatch({
+                type: post.actionTypes['APPEND'],
+                payload: {
+                    [data.id] : data
+                }
+            });
+            return data.id;
+        }
+
+
     } catch (e) {
         console.trace(e)
     }

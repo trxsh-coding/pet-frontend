@@ -118,6 +118,12 @@ export const API_ROUTES = Object.freeze({
      * @param none
      * @returns {object}
      */
+    CREATE_VIDEO_POST : `api/v1/post/video`,
+    /**
+     * @description create post, POST request
+     * @param none
+     * @returns {object}
+     */
 
     GET_STATUS: `api/v1/user/status`,
     /**

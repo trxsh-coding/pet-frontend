@@ -12,3 +12,11 @@ export const api = ({URL, METHOD = 'GET', BODY, PARAMS}) => {
         params: PARAMS ? PARAMS : null
     });
 };
+
+export const cloudinaryApi = async (file) => {
+     return axios({
+        method: 'POST',
+        url: process.env.REACT_APP_CLOUDINARY_API +  process.env.REACT_APP_CLOUDNAME + '/upload',
+        data: file,
+    });
+};

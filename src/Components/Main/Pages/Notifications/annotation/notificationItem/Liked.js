@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import ReusableImage from "../../../../../Reusable/Image";
-import history from "../../../../../../services/history";
-
+import {useHistory} from 'react-router-dom'
 function LikedItem({pet, author, date, post, comment}) {
+    const history = useHistory()
     return (
         <div className='flex-align-start flex-between'>
             <div className='flex-align-center'>
@@ -20,11 +20,11 @@ function LikedItem({pet, author, date, post, comment}) {
                     </div>
                 </div>
             </div>
-            <div className='mt-5'>
+            <div className='mt-5 pointer' onClick={() => history.push(`/post/${post.id}`)}>
                 <ReusableImage
                     styles={{borderRadius:'4px'}}
                     size={60}
-                    link={post.picture}
+                    link={post.content}
                     fromServer
                 />
             </div>

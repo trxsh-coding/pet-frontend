@@ -16,7 +16,7 @@ function CreationBody(props) {
     const history = useHistory();
    async function onSubmitEvent() {
        const result = await dispatch(createPet({...values, ...{ownerId:current}}));
-       history.push(`/pet/${result}`)
+       if(result)history.push(`/pet/${result}`)
        console.log(result)
     }
     const form = { name:'', ages:'', breed:'', type:'', gender:'', avatar:''}

@@ -36,7 +36,7 @@ function MissingsImagesUpload({upload}) {
         return images.map( (el, index) =>
 
                 <div className={`relative ${!mobile ? 'mr-30 ' : ''} pointer mb-30`}>
-                    <ReusableUpload withHover={false} action={(e) => onUpload(index, e) }>
+                    <ReusableUpload withHover={false} withCrop={false} action={(e) => onUpload(index, e) }>
                         <BackgroundedImage index={index}/>
                     </ReusableUpload>
                 </div>

@@ -35,7 +35,8 @@ function PostAnnotation(props) {
                     likeId={post.likeId}
                     petOwnerId={post.authorId.ownerId}
                     petId={post.authorId.id}
-                    isPostCreator={current === post.authorId._id}
+                    content={post.content}
+                    isPostCreator={current === post.authorId.ownerId}
 
                 />
             </div>

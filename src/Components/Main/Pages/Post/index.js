@@ -14,6 +14,7 @@ function Post(props) {
 
      function initialize() {
          dispatch(postActions[GET_BY_ID](id))
+
     }
 
     const RenderPostAnnotation = _ => Object.keys(post).length ? <PostAnnotation post={post}/> : null

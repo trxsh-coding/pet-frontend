@@ -18,7 +18,8 @@ export default class Reducer {
             SET_LOADING: 'SET_LOADING',
             UPDATE_FIELD: 'UPDATE_FIELD',
             APPEND_TO_CHILD: 'APPEND_TO_CHILD',
-            CHANGE_QUANTITY: 'CHANGE_QUANTITY'
+            CHANGE_QUANTITY: 'CHANGE_QUANTITY',
+            UPDATE_NESTED_FIELD:'UPDATE_NESTED_FIELD'
         }
     }
     _setActionPrefix(prefix, action) {
@@ -44,7 +45,8 @@ export default class Reducer {
             SET_LOADING,
             UPDATE_FIELD,
             APPEND_TO_CHILD,
-            CHANGE_QUANTITY
+            CHANGE_QUANTITY,
+            UPDATE_NESTED_FIELD
         } = this.actionTypes;
 
         const {type, payload, key} = action;
@@ -107,6 +109,7 @@ export default class Reducer {
 
                 }
             }
+
             case UPDATE_FIELD: {
                 const {key, value, map, field} = payload;
                 return  {
@@ -120,15 +123,18 @@ export default class Reducer {
                     }
                 }
             }
-            case UPDATE_FIELD: {
-                const {key, value, map, field} = payload;
+            case UPDATE_NESTED_FIELD: {
+                const {key, value, map, field, nested_field} = payload;
                 return  {
                     ...state,
                     [map]: {
                         ...state[map],
                         [key]:{
                             ...state[map][key],
-                            [field]:value
+                            [field]:{
+                                ...state[map][key][field],
+                                [nested_field]:value
+                            }
                         }
                     }
                 }

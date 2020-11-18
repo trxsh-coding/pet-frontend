@@ -16,15 +16,14 @@ const ReusableImage = (props) => {
         height: size ? size : height,
         borderRadius: rounded ? '50%' : 0,
         objectFit: 'cover',
-        border:'0.5px solid #C4C4C4',
         ...styles
     };
    const imageWrapper =  <div className='imageWrapper' style={imageStyle} />;
 
-   const urlPath = fromServer ? process.env.REACT_APP_ASSETS_PATH + `/${link}` : link;
+   const urlPath = fromServer && link ? link.contentURL : link;
 
    const image = <img src={urlPath} alt="Logo" style={imageStyle} />;
-
+    console.log(link)
    return link ? image : imageWrapper;
 };
 

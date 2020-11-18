@@ -19,13 +19,16 @@
 .annotation-wrapper {
   .image-wrapper {
     position: absolute;
-    top: 60%;
-    z-index: 10;
+    top: 50%;
+    z-index: 11;
     left:47px;
   }
   .annotation-nav {
     height: 70px;
-    z-index: 2;
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     .user-annotation-left-column {
       flex:0.7;
       height: 100%;

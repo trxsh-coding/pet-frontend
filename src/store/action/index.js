@@ -26,14 +26,22 @@ export default class Actions {
             formData.append('id', id);
             const {data} = await api({
                 URL:route === 'avatar' ?
-                    API_ROUTES.UPDATE_AVATAR(this.storeName) : API_ROUTES.UPDATE_BACKGROUND(this.storeName),
+                    API_ROUTES.UPDATE_AVATAR(this.storeName) :
+                    API_ROUTES.UPDATE_BACKGROUND(this.storeName),
                 METHOD:'patch',
                 BODY:formData
             });
             dispatch({
-                type: this.reducerContext.actionTypes['UPDATE_FIELD'],
-                payload: {value : data, key : id, map:'data', field:route},
+                type: this.reducerContext.actionTypes['UPDATE_NESTED_FIELD'],
+                payload: {
+                    value : data,
+                    key : id,
+                    map:'data',
+                    field:route,
+                    nested_field:'contentURL'
+                },
             });
+            return data
         }catch (e) {
             console.trace(e)
         }

@@ -7,15 +7,16 @@ import {store} from "./store";
 import {BrowserRouter} from "react-router-dom";
 import SocketProvider from "./Context/socketProvider";
 import ResponsiveProvider from "./Context/responsiveProvider";
+import {CloudinaryContext} from 'cloudinary-react';
 
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
-          <SocketProvider>
-              <ResponsiveProvider>
-                  <App />
-              </ResponsiveProvider>
-          </SocketProvider>
+              <SocketProvider>
+                  <ResponsiveProvider>
+                      <App />
+                  </ResponsiveProvider>
+              </SocketProvider>
       </Provider>
   </React.StrictMode>,
   document.getElementById('root')
