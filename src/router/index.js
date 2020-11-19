@@ -24,7 +24,7 @@ import {CloudinaryContext} from "cloudinary-react";
 
 function Routing(props) {
     const history = createBrowserHistory();
-    console.log(history)
+    console.log(history, 'history')
     return (
                 <Router history={history}>
                     <RenderHeader />

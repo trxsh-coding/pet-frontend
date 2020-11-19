@@ -8,13 +8,13 @@ function DialogBody(props) {
     const {receiver, sender, current, members, messages} = props;
     const messagesEndRef = useRef(null)
     const mobile = useContext(ResponsiveContext)
-
     const scrollToBottom = () => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
     }
     useEffect(scrollToBottom,[messages])
 
     const RenderMessagesList = _ => messages ? messages.map( el => {
+        console.log(el)
         const isReceiver = receiver.id === el.receiverId
         const messageBodyStyle = {
             backgroundColor: isReceiver ?
@@ -23,15 +23,18 @@ function DialogBody(props) {
         const messageContainerStyle = {
             flexFlow: isReceiver ?
                 'row-reverse' : 'row',
-                width:'100%'
+                width:'100%',
+
         }
         const descriptionStyle = {
             color: isReceiver ?
                 '#ffffff' : '#000000'
         }
+        console.log(members)
+        console.log(el.creatorId)
         return (
-            <div className='flex-column mt-20' style={messageContainerStyle}>
-                {!mobile &&
+            <div className='flex-column pt-20' style={messageContainerStyle}>
+                {!mobile && members &&
                     <ReusableImage
                         link={members[el.creatorId].avatar}
                         size={40}

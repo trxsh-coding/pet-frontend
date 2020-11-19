@@ -11,6 +11,9 @@ import ReusableMap from "../../../Reusable/Map";
 import ReusableButton from "../../../Reusable/Button";
 import ResponsiveContext from "../../../../Context/responsiveContext";
 import HeaderContext from "../../../../Context/headerContext";
+import ReusableModal from "../../../Reusable/Modal";
+import ReusableInput from "../../../Reusable/Input";
+import {getRoom, sendMessageWithRoom} from "../../../../store/modules/chat";
 function Missing(props) {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -18,6 +21,8 @@ function Missing(props) {
     const {id} = match.params;
     const item = useSelector( s => s.missing.data[id] || {})
     const [response, setResponse] = useState(false)
+    const [modal, setModal] = useState(false)
+    const [description, setDescription]= useState('')
     useEffect(() => {
         dispatch(missingActions[GET_BY_ID](id))
     }, [])
@@ -57,10 +62,21 @@ function Missing(props) {
             <span className='font-20'>Вознаграждение:</span> <span style={{color:'#43B05C'}}>{item.reward}</span>
         </div>
 
+   async function onChatCreate() {
+        const result =  await dispatch(sendMessageWithRoom({receiver : item.authorId._id, description }))
+        if(result) setModal(false)
+    }
+    function onWriteAction() {
+        dispatch(getRoom(item.authorId._id))
+            .then( e => {
+                typeof e === 'string' ? setModal(true) : history.push(`/chat/room/${e.id}`)
+            })
+    }
+
 
     const RenderUnvisibleButtonBlock = _ => response &&
         <div className={`${mobile ? 'flex-column' : 'flex'} flex-between mt-20 buttons-block`}>
-            <ReusableButton secondaryStyle>
+            <ReusableButton secondaryStyle action={() => onWriteAction()}>
                 Написать сообщение
             </ReusableButton>
             {item.authorId.phone &&
@@ -90,6 +106,23 @@ function Missing(props) {
                 <RenderRewardBlock />
 
                 <RenderUnvisibleButtonBlock />
+
+                <ReusableModal visible={modal}
+                               height='fit-content'
+                               onClose={() => setModal(false)}
+                               title='Написать сообщение'>
+                    <div className='flex-column flex-align-stretch flex-1'>
+                        <ReusableInput
+                            type='textarea'
+                            styles={{width:'100%', marginTop:'20px'}}
+                            fixedSize={150}
+                            onChange={(e) => setDescription(e)}
+                            value={description}/>
+                        <ReusableButton styles={{marginTop:'20px', width:'100px'}} action={() => onChatCreate()}>
+                            Отправить
+                        </ReusableButton>
+                    </div>
+                </ReusableModal>
 
                 <div className='flex flex-center mt-30'>
                     <ReusableButton

@@ -37,7 +37,7 @@ function PostBody(props) {
 
     const RenderContent = _ => {
         return content.contentType === 'video' ? (
-            <ReusablePlayer publicId={content.publicId}/>
+            <ReusablePlayer publicId={content.publicId} autoplay={true}/>
         ) :
             (
                 <ReusableImage width={!mobile ? 653 : '100%'} height={mobile ? 288 : 500} fromServer link={content}/>

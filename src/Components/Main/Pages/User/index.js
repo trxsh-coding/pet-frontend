@@ -28,6 +28,8 @@ function User(props) {
                         background={user.background}
                         current={current}
                         id={user._id}
+                        disableUpload
+
             />
             <UserInfoSection
                 current={current}

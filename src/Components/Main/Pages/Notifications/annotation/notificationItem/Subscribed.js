@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import ReusableImage from "../../../../../Reusable/Image";
-import history from "../../../../../../services/history";
 import {normalizeTime} from "../../../../../../Utils/timestamp";
-
+import {useHistory} from 'react-router-dom'
 function SubscribedItem({pet, author, date}) {
+    const history = useHistory();
     return (
         <div className='flex-align-start'>
             <ReusableImage

@@ -14,11 +14,23 @@ function CreationBody(props) {
     const {current} = props;
     const dispatch = useDispatch();
     const history = useHistory();
-   async function onSubmitEvent() {
-       const result = await dispatch(createPet({...values, ...{ownerId:current}}));
-       if(result)history.push(`/pet/${result}`)
-       console.log(result)
+    const [errors, setErrors] = useState({})
+    async function onSubmitEvent() {
+        try {
+            const result = await dispatch(createPet({...values, ...{ownerId:current}}));
+            if(result.errors){
+                setErrors({...result.errors})
+            }else {
+                history.push(`/pet/${result}`)
+            }
+        }catch (error) {
+            console.log(error, 'response')
+        }finally {
+
+        }
     }
+    console.log(errors)
+
     const form = { name:'', ages:'', breed:'', type:'', gender:'', avatar:''}
     const [values, handleChange, customStateChange, handleSubmit] = useForm(form, onSubmitEvent);
    const mobile = useContext(ResponsiveContext)
@@ -34,6 +46,7 @@ function CreationBody(props) {
                        onChange={handleChange}
                        key={el}
                 />
+                <span className='validation-error'>{errors[el]}</span>
             </div>
         )
     })

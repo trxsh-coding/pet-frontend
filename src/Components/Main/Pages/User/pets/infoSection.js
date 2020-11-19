@@ -137,15 +137,18 @@ function UserInfoSection(props) {
         <div className='user-info-section '>
             <div className='user-info mt-95 flex-column flex-align-center mr-50'>
                 <RenderUserButton />
-                <div className='flex-align-center mt-20'>
-                    <span className=''>Город:</span>
-                    <RenderInfoBlock value={city} field={'city'}/>
-
-                </div>
-                <div className='flex-align-center mt-20'>
-                    <span >Телефон:</span>
-                    <RenderInfoBlock value={phone} field={'phone'}/>
-                </div>
+                {city &&
+                    <div className='flex-align-center mt-20'>
+                        <span className=''>Город:</span>
+                        <RenderInfoBlock value={city} field={'city'}/>
+                    </div>
+                }
+                {phone &&
+                    <div className='flex-align-center mt-20'>
+                        <span >Телефон:</span>
+                        <RenderInfoBlock value={phone} field={'phone'}/>
+                    </div>
+                }
                 <div className='flex-align-center mt-20'>
                     <RenderOnlineBlock />
                 </div>

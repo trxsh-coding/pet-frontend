@@ -8,8 +8,8 @@ function MissingsImagesMap({images}) {
         return (
                 <ReusableImage
                     link={el}
-                    width={images.length > 1 && !mobile ? 165: '100%'}
-                    height={mobile ? 360 : 165}
+                    width={'70%' }
+                    height={mobile ? 165 : 360}
                     fromServer
                 />
         )

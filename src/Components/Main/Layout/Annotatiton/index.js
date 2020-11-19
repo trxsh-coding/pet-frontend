@@ -15,7 +15,7 @@ import history from "../../../../services/history";
 import {petActions} from "../../../../store/modules/pet";
 import ResponsiveContext from "../../../../Context/responsiveContext";
 
-const ImageWrapper = ({children, route, model, current, action, id}) => {
+const ImageWrapper = ({children, route, model, current, action, id, disableUpload = false}) => {
     const dispatch = useDispatch();
     async function onUpload(props) {
         const {file, route, model, id} = props;
@@ -24,7 +24,7 @@ const ImageWrapper = ({children, route, model, current, action, id}) => {
             await dispatch(petActions[UPDATE_PICTURE](file, route, model, id)) :
             await dispatch(userActions[UPDATE_PICTURE](file, route, model, id))
     }
-    return  current ? (
+    return  current && disableUpload ? (
         <ReusableUpload
             action={ (file) => onUpload({route, model, id, file})}
             type={route}
@@ -35,9 +35,9 @@ const ImageWrapper = ({children, route, model, current, action, id}) => {
 }
 
 function Annotation(props) {
-    const {username, avatar, background} = props;
+    const {username, avatar, background, id} = props;
     const mobile = useContext(ResponsiveContext)
-    const RenderLinks = _ => !mobile? <Links username={username} /> : null;
+    const RenderLinks = _ => !mobile? <Links username={username} id={id} /> : null;
     return (
          <>
              <div className="annotation-wrapper relative">
@@ -49,7 +49,7 @@ function Annotation(props) {
                          <ReusableImage size={mobile ? 75 : 200} rounded link={avatar} fromServer />
                      </ImageWrapper>
                  </div>
-                 <RenderLinks />
+                 <RenderLinks id={id}/>
              </div>
          </>
      )

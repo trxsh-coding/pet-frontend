@@ -23,7 +23,6 @@ const ReusableImage = (props) => {
    const urlPath = fromServer && link ? link.contentURL : link;
 
    const image = <img src={urlPath} alt="Logo" style={imageStyle} />;
-    console.log(link)
    return link ? image : imageWrapper;
 };
 

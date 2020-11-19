@@ -28,7 +28,7 @@ export const ROUTE_NAMES = Object.freeze({
        REGISTRATION:'registration',
    },
    MAIN: {
-       '/':'Лента',
+       '':'Лента',
        MISSINGS:'Объявления',
        SUBSCRIPTIONS:'Подписки',
        SEARCH:'Поиск',

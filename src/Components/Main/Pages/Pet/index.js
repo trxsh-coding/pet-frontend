@@ -46,7 +46,7 @@ function Pet(props) {
                 background={background}
                 model='pet'
                 action={petActions}
-                current={current}
+                current={isOwner}
             />
             <div className="pet-bottom-section flex pt-40 flex-between ">
                 <ButtonSection

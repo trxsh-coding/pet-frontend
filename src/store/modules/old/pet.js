@@ -30,7 +30,7 @@ export const createPet = form => async (dispatch) => {
         });
         return getKey(data);
     } catch (e) {
-        console.trace(e)
+        return e.response.data
     }
 };
 

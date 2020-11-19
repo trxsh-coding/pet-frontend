@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import ReusableImage from "../../../../../Reusable/Image";
-import history from "../../../../../../services/history";
+import {useHistory} from 'react-router-dom'
 
 function CommentedItem({pet, author, date, post, comment}) {
+    const history = useHistory()
     return (
         <div className='flex-align-start flex-between'>
             <div className='flex-align-center'>

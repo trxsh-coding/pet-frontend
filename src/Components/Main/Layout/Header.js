@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import chatIcon from "../../../Assets/svg/chat.svg"
 import searchIcon from "../../../Assets/svg/search.svg"
 import notificationIcon from "../../../Assets/svg/notification.svg"
+import missingsIcon from "../../../Assets/svg/megaphone.svg"
+
 import {useHistory} from 'react-router-dom'
 import dropdownIcon from "../../../Assets/svg/dropdown.svg"
 import ReusableDropdown from "../../Reusable/Dropdown";
@@ -14,7 +16,6 @@ import {api} from "../../../Utils/fetch";
 import {API_ROUTES} from "../../../Constants";
 import ReusableBadge from "../../Reusable/Badge";
 import {getNotificationsCount} from "../../../store/modules/notifications";
-
 function Header() {
     const current = useSelector( s => s.user.current || {}) ;
     const user = useSelector( s => s.user.data[current] || {}) ;
@@ -54,11 +55,13 @@ function Header() {
                         <img src={notificationIcon} alt="notification-icon"/>
                         {notificationCount > 0 && <ReusableBadge amount={notificationCount}/>}
                     </div>
+                    <div className='ml-20 pointer' onClick={() => history.push('/missings')}>
+                        <img src={missingsIcon} alt={'missings-icon'} />
+                    </div>
                 </div>
                 <div   className='flex-align-center '>
                     <div className='flex-align-center relative'
-                        onMouseEnter={() => setDropdown(true)}
-                         onMouseLeave={() => setTimeout(() => setDropdown(false), 2000)}
+
                     >
                         <ReusableImage
                             size='40px'
@@ -67,9 +70,11 @@ function Header() {
                             link={user.avatar}
 
                         />
-                        <span className='pl-15 font-16 light-weight pr-10'>{user.username}</span>
-                        <img src={dropdownIcon} alt="dropdownIcon"/>
-                        <ReusableDropdown visible={dropdown} action={(payload) => setDropdown(payload)}>
+                        <span className='pl-15 font-16 light-weight pr-10 pointer' onClick={() => history.push(`/user/${user.id}`)}>{user.username}</span>
+                        <div className='pointer' onClick={() => setDropdown(!dropdown)} style={{height:'100%', width:'20px'}}>
+                            <img src={dropdownIcon} alt="dropdownIcon"  />
+                        </div>
+                        <ReusableDropdown visible={dropdown}   action={(payload) => setDropdown(payload)}>
                             <div>
                                 <span className='light-weight pointer' onClick={() => history.push(`/user/${user.id}`)}>Моя страница</span>
                             </div>

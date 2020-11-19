@@ -3,10 +3,8 @@ import './reusable.scss'
 const ReusableDropdown = (props) => {
     const {children, visible, action} = props;
     return visible ? (
-        <div className='dropdown'>
+        <div className='dropdown' onClick={() => action(true)}>
             <div className='flex-column'
-                 onMouseOver={() => action(true)}
-                 onMouseLeave={() => action(false)}
             >
                 {children}
             </div>
