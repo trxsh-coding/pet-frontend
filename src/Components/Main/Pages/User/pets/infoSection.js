@@ -54,7 +54,7 @@ function UserInfoSection(props) {
     const RenderPetBlock = ({pet})=> {
         const {avatar} = pet;
         return (
-                <div className=' flex-align-center mt-20' onClick={() => history.push(`/pet/${pet.id}`)}>
+                <div className=' flex-align-center mt-20 mb-10' onClick={() => history.push(`/pet/${pet.id}`)}>
                     <ReusableImage link={avatar} rounded size={40} fromServer/>
                     <span className='pl-15 light-weight font-16'>{pet.name}</span>
                 </div>
@@ -92,7 +92,7 @@ function UserInfoSection(props) {
     }
     const RenderInfoBlock = ({value, field}) => editable ? <EditInput value={value} field={field}/> : <span>{value}</span>
     const PetModalList = _ => pets.map(el => (
-       <div className='flex-align-center flex-column flex-between pointer' onClick={() => history.push(`/pet/${el.id}`)}>
+       <div className='flex-align-center flex-column mb-20 pointer mr-20' onClick={() => history.push(`/pet/${el.id}`)}>
            <ReusableImage link={el.avatar} size={100} rounded fromServer/>
            <span style={{color:'#4A76A8'}} className='font-16 mt-10'>{el.name}</span>
        </div>
@@ -137,18 +137,14 @@ function UserInfoSection(props) {
         <div className='user-info-section '>
             <div className='user-info mt-95 flex-column flex-align-center mr-50'>
                 <RenderUserButton />
-                {city &&
-                    <div className='flex-align-center mt-20'>
-                        <span className=''>Город:</span>
-                        <RenderInfoBlock value={city} field={'city'}/>
-                    </div>
-                }
-                {phone &&
-                    <div className='flex-align-center mt-20'>
-                        <span >Телефон:</span>
-                        <RenderInfoBlock value={phone} field={'phone'}/>
-                    </div>
-                }
+                <div className='flex-align-center mt-20'>
+                    <span className=''>Город:</span>
+                    {city && <RenderInfoBlock value={city} field={'city'}/>}
+                </div>
+                <div className='flex-align-center mt-20'>
+                    <span >Телефон:</span>
+                    {phone && <RenderInfoBlock value={phone} field={'phone'}/>}
+                </div>
                 <div className='flex-align-center mt-20'>
                     <RenderOnlineBlock />
                 </div>
@@ -161,7 +157,7 @@ function UserInfoSection(props) {
                 onClose={() => setVisible(false)}
                 styles={{height:'468px'}}
             >
-                <div className='flex pets-modal'>
+                <div className='flex pets-modal mt-20'>
                     <PetModalList />
                 </div>
             </ReusableModal>

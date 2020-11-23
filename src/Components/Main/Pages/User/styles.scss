@@ -49,7 +49,7 @@
 }
 .pets-modal {
   width: 100%;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 .about-section {
   background: #ffffff;
