@@ -21,6 +21,8 @@ import RenderHeader from "../Components/Main/Layout/RenderHeader";
 import Missing from "../Components/Main/Pages/Missing";
 import Test from "../Components/Test";
 import {CloudinaryContext} from "cloudinary-react";
+import MissingCreateForm from "../Components/Main/Pages/Missings/annotation/missingCreateForm";
+import CreateMissing from "../Components/Main/Pages/Missings/create";
 
 function Routing(props) {
     const history = createBrowserHistory();
@@ -38,7 +40,7 @@ function Routing(props) {
                                     <PrivateRoute path='/add-pet' component={PetCreation} />
                                     <PrivateRoute path='/notifications' component={Notifications} />
                                     <PrivateRoute path='/missings' component={MissingAds} />
-
+                                    <PrivateRoute path='/createMissing' component={CreateMissing} />
                                     <Route  path='/user/:id' component={User} />
                                     <Route  path='/pet/:id' component={Pet} />
                                     <Route  path='/test' component={Test} />

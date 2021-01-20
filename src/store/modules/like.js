@@ -1,18 +1,11 @@
-import Reducer from "../reducer";
-import Actions from "../action";
-import user from "../reducer";
 import {api} from "../../Utils/fetch";
 import {API_ROUTES} from "../../Constants";
-import {chat} from "./chat";
 import {post} from "./post";
-import {pet} from "./pet";
-export const like = new Reducer('_LIKE', {data:[]});
-export const likeActions = new Actions('chat', like)
 
-export const createLike = (id, ownerId, petId) => async (dispatch) => {
-    const {data} = await api({URL:API_ROUTES.CREATE_LIKE(id), METHOD:'POST', BODY: {ownerId, petId}});
+export const createLike = (id) => async (dispatch) => {
+    const {data} = await api({URL:API_ROUTES.CREATE_LIKE(id), METHOD:'POST'});
     dispatch({
-        type: like.actionTypes['APPEND_TO_CHILD'],
+        type: post.actionTypes['APPEND_TO_CHILD'],
         payload: {
             id: id,
             key:'likes',
@@ -21,7 +14,7 @@ export const createLike = (id, ownerId, petId) => async (dispatch) => {
     });
     dispatch({
         type: post.actionTypes['UPDATE_FIELD'],
-        payload: {value : data.id, key : id, map:'data', field:'likeId'},
+        payload: {value : data, key : id, map:'data', field:'likeId'},
     });
     dispatch({
         type: post.actionTypes['CHANGE_QUANTITY'],
@@ -47,4 +40,3 @@ export const deleteLike = (id, likeId) => async (dispatch) => {
 
 
 
-export default like.create();

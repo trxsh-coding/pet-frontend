@@ -14,6 +14,7 @@ function ShortPost(props) {
     function onRouterPush() {
         history.push(`/post/${props.id}`)
     }
+    console.log(content)
     const mobile = useContext(ResponsiveContext)
     return (
         <div className="short-post" onClick={() => onRouterPush()} >

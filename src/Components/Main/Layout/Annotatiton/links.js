@@ -6,7 +6,7 @@ import {useHistory, useLocation} from 'react-router-dom'
 export const Links = ({username, id}) => {
     const history = useHistory()
     const location = useLocation()
-    const links = Object.keys(ROUTE_NAMES.MAIN).map((route, index) => {
+    const links = Object.keys(ROUTE_NAMES.SHORT).map((route, index) => {
 
         const currentLocation = location.pathname === route.toLowerCase()
 

@@ -20,7 +20,7 @@ function PostComments(props) {
     }
     const RenderComments = _ => comments.map( comment => {
         return (
-            <>
+            <div className='comments-block'>
                 <div className='flex-between comment-block mb-15'>
                     <div className="comment-info-block ">
                         <span onClick={() => history.push(`/user/${comment.author._id}`)} className='comment-username'>{comment.author.username} </span>
@@ -28,15 +28,20 @@ function PostComments(props) {
                     </div>
                     <span className='timestamp'>{normalizeTime(comment.date)}</span>
                 </div>
-            </>
+            </div>
         )
     })
 
     return (
-        <>
-            <RenderComments />
-            <ReusableInput onChange={(e) => setComment(e)} value={comment} action={() => onCommentSaved()}/>
-        </>
+        <div className='comments-wrapper '>
+            <div className="comments-sections">
+                <RenderComments />
+            </div>
+            <ReusableInput onChange={(e) => setComment(e)}
+                           value={comment}
+                           styles={{flex:0}}
+                           action={() => onCommentSaved()}/>
+        </div>
     )
 }
 

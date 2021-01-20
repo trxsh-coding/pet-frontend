@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {getSubscriptions} from "../../../../store/modules/user";
 import {useDispatch, useSelector} from "react-redux";
 import './styles.scss'
 import PetShortAnnotation from "../Pet/annotation/shortAnnotation";
 import ComponentWrapper from "../../../Reusable/ComponentWrapper";
 import ShortPet from "./annotation/shortPet";
+import ShortAnnotation from "../../Layout/Annotatiton/ShortAnnotation";
+import ResponsiveContext from "../../../../Context/responsiveContext";
 function Subscriptions(props) {
 
     const dispatch = useDispatch();
@@ -24,12 +26,16 @@ function Subscriptions(props) {
        initialize().then(callback => console.log(callback))
 
     }, []);
+    const mobile = useContext(ResponsiveContext)
     return (
-        <ComponentWrapper title='Подписки'>
-            <div className='flex'>
-                <RenderShortPets />
-            </div>
-        </ComponentWrapper>
+        <>
+            {!mobile && <ShortAnnotation />}
+            <ComponentWrapper title='Подписки'>
+                <div className='flex'>
+                    <RenderShortPets />
+                </div>
+            </ComponentWrapper>
+        </>
     );
 }
 

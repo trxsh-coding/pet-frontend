@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import ComponentWrapper from "../../../Reusable/ComponentWrapper";
 import {postActions} from "../../../../store/modules/post";
@@ -7,6 +7,8 @@ import Spinner from "../../../Reusable/Spinner";
 import PostAnnotation from "./layout/Annotation";
 import Annotation from "../../Layout/Annotatiton";
 import {petActions} from "../../../../store/modules/pet";
+import ShortAnnotation from "../../Layout/Annotatiton/ShortAnnotation";
+import ResponsiveContext from "../../../../Context/responsiveContext";
 function Post(props) {
     const { match } = props;
     const { id } = match.params;
@@ -25,19 +27,13 @@ function Post(props) {
     useEffect(() => {
         initialize(id)
     }, [id]);
+    const mobile = useContext(ResponsiveContext)
 
     if(loading) return <div className='transform-center'> <Spinner/> </div>
+
     return (
         <div className='mt_20'>
-            <Annotation
-                id={id}
-                username={user.name}
-                avatar={user.avatar}
-                background={user.background}
-                model='user'
-                disalbeUpload
-                action={petActions}
-            />
+            {!mobile && <ShortAnnotation />}
             <ComponentWrapper title='Публикация' styles={{marginBottom:'20px'}}>
                 <RenderPostAnnotation />
             </ComponentWrapper>

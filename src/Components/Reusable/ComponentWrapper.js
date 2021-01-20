@@ -19,10 +19,7 @@ const ComponentWrapper = ({children, styles, title, width='100%', withActionButt
     const mobile = useContext(ResponsiveContext)
     return !mobile ? (
         <div className='component-wrapper' style={wrapperStyle}>
-            <div className="wrapper-header " >
-                <span>{title}</span>
-                <RenderActionButton />
-            </div>
+
             <div className="wrapper-body">
                 {children}
             </div>

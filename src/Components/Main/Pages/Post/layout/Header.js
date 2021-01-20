@@ -11,7 +11,9 @@ function PostHeader(props) {
     }
     return (
         <div className='flex'>
-            <div onClick={onRouterPush}><ReusableImage styles={{cursor:'pointer'}} size={40} link={link} rounded fromServer/></div>
+            <div onClick={onRouterPush}>
+                <ReusableImage styles={{cursor:'pointer'}} size={40} link={link} rounded fromServer/>
+            </div>
             <div className="author-info ml-10 flex-column">
                 <span  className='pointer' onClick={onRouterPush}>{username}</span>
                 <span className='timestamp'>{normalizeTime(date)}</span>

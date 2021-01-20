@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import ResponsiveContext from "../../Context/responsiveContext";
-
+import markerIcon from '../../Assets/img/placeholder.png'
 
 
 function ReusableMap({lng}) {
@@ -36,6 +36,9 @@ function ReusableMap({lng}) {
         >
             <Marker
                 position={coordinates}
+                icon={{
+                    url:markerIcon
+                }}
             />
         </GoogleMap>
     )

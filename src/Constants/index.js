@@ -34,6 +34,11 @@ export const ROUTE_NAMES = Object.freeze({
        SEARCH:'Поиск',
        NOTIFICATIONS:'Уведомления',
        CHAT:'Сообщения',
+   },
+   SHORT: {
+       '':'Лента',
+       MISSINGS:'Объявления',
+       SUBSCRIPTIONS:'Подписки'
    }
 });
 

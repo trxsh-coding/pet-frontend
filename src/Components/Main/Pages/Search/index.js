@@ -8,12 +8,14 @@ import Aside from "../../Layout/Aside";
 import SearchInput from "./layout/searchInput";
 import ResponsiveContext from "../../../../Context/responsiveContext";
 import './style.scss'
+import ShortAnnotation from "../../Layout/Annotatiton/ShortAnnotation";
 
 function Search(props) {
     const dispatch = useDispatch();
     const history = useHistory();
     const [value, setValue] = useState(history.location.state)
     const [query, setQuery] = useState('name')
+
     function initialize(value) {
         if(value) dispatch(searchPet({[query] : value}))
     }
@@ -37,7 +39,6 @@ function Search(props) {
             )
         })
     }
-    console.log(query)
     const map = {
         name:'Имя',
         breed:'Порода'

@@ -33,7 +33,7 @@ function MissingCreateForm() {
     }
     const mobile = useContext(ResponsiveContext)
     return (
-        <div className='missing-form flex-column mt-20'>
+        <div className='missing-form flex-column mt-20 flex-center'>
             <form onSubmit={handleSubmit}>
                 <div className={`flex-align-center ${mobile ? 'flex-column' : 'flex'}`}>
                     <div className='images-block'>
@@ -48,11 +48,9 @@ function MissingCreateForm() {
                     </div>
                 </div>
                 <InputSection action={(type, value) => customStateChange({key:type, value:value})}/>
-                <div className='flex-center flex-1 mt-20'>
-                    <ReusableButton >
-                        Разместить
-                    </ReusableButton>
-                </div>
+                <ReusableButton >
+                    Создать объявление
+                </ReusableButton>
             </form>
 
         </div>

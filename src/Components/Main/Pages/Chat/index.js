@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ComponentWrapper from "../../../Reusable/ComponentWrapper";
 import {GET_LIST} from "../../../../store/types";
 import {useDispatch, useSelector} from "react-redux";
 import {chatActions} from "../../../../store/modules/chat";
 import RoomAnnotation from "./layout/roomAnnotation";
 import Spinner from "../../../Reusable/Spinner";
+import ShortAnnotation from "../../Layout/Annotatiton/ShortAnnotation";
+import ResponsiveContext from "../../../../Context/responsiveContext";
 function Chat() {
     const dispatch = useDispatch();
     const current = useSelector( (s) => s.user.current);
@@ -13,6 +15,7 @@ function Chat() {
     function initialize() {
         dispatch(chatActions[GET_LIST](current))
     }
+    const mobile = useContext(ResponsiveContext)
     useEffect(() => {
         initialize()
     }, [])
@@ -29,6 +32,7 @@ function Chat() {
         null
     return (
         <div className="Chat">
+            {!mobile &&  <ShortAnnotation />}
             <ComponentWrapper title='Сообщения'>
                 <ChatList />
             </ComponentWrapper>
