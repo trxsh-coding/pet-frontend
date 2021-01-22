@@ -32,6 +32,22 @@ export const signUp = payload => async (dispatch) => {
 
 };
 
+export const ForgotPassword = payload => async (dispatch) => {
+
+    const {data} = await api({URL:API_ROUTES.FORGOT_PASSWORD, METHOD:'POST', BODY:payload});
+
+    return data;
+
+};
+
+export const resetPassword = (payload, token) => async (dispatch) => {
+
+    const {data} = await api({URL:API_ROUTES.RESET_PASSWORD(token), METHOD:'PATCH', BODY:payload});
+
+    return data;
+
+};
+
 export const checkStatus = _ => async (dispatch) => {
     try {
         const {data} = await api({URL:API_ROUTES.GET_STATUS, METHOD:'GET'});

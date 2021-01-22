@@ -27,6 +27,7 @@ function PostBody(props) {
         likeId,
         likes,
         amountOfLikes,
+        bookmark
     } = post;
     return (
         <div className='post-body ml-20'>
@@ -40,11 +41,14 @@ function PostBody(props) {
                 amountOfLikes={amountOfLikes}
                 description={post.description}
                 likeId={likeId}
+                bookmarkId={bookmark}
                 content={post.content}
                 isPostCreator={current === post.authorId.ownerId}
             />
+            <div className='flex-wrap mt-12'><span>{description}</span></div>
+            <div className='hr mt-20 mb-10'/>
+
             <RenderComments/>
-            <div className='description-block'><span>{description}</span></div>
         </div>
     );
 }

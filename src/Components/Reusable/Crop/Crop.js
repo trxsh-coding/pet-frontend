@@ -10,6 +10,7 @@ function ReusableCrop(props) {
         image,
         type,
         onAction,
+        description,
         withButton = true,
         children,
         height='300px'
@@ -21,6 +22,7 @@ function ReusableCrop(props) {
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
+    console.log(description)
     const showCroppedImage = useCallback(async () => {
         try {
             const croppedImage = await getCroppedImg(
@@ -28,11 +30,11 @@ function ReusableCrop(props) {
                 croppedAreaPixels,
                 rotation
             )
-            onAction(croppedImage)
+            onAction(croppedImage, description )
         } catch (e) {
             console.error(e)
         }
-    }, [croppedAreaPixels, rotation])
+    }, [croppedAreaPixels, rotation, description])
 
     const CropDimensions = _ => {
         let CropValues = {
@@ -78,8 +80,9 @@ function ReusableCrop(props) {
                     </div>
 
                 </div>
+
                 {children}
-                <ReusableButton action={() => showCroppedImage()} styles={{marginTop:'20px'}}>
+                <ReusableButton action={showCroppedImage} styles={{marginTop:'20px'}}>
                     Сохранить
                 </ReusableButton>
             </div>

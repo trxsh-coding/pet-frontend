@@ -3,10 +3,12 @@ import liked from "../../../../../Assets/svg/liked.svg";
 import {createLike, deleteLike} from "../../../../../store/modules/like";
 import like from "../../../../../Assets/svg/like.svg";
 import comments from "../../../../../Assets/svg/comments.svg";
-import bookmark from "../../../../../Assets/svg/bookmark.svg";
+import bookmarkIcon from "../../../../../Assets/svg/bookmark.svg";
+import bookmarkedIcon from "../../../../../Assets/svg/bookmarked.svg";
 
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {useDispatch} from "react-redux";
+import {createBookmark, deleteBookmark} from "../../../../../store/modules/bookmark";
 
 function PostIconsBlock(props) {
     const {
@@ -16,14 +18,22 @@ function PostIconsBlock(props) {
         likeId,
         isPostCreator,
         likes,
+        bookmarkId
     } = props;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);
+
     function onPressLikeAction() {
-        if(likeId !== null) dispatch(deleteLike(id, likeId))
-        else if(!isPostCreator) dispatch(createLike(id))
-        else if(isPostCreator && Object.values(likes).length) setVisible(true)
+        if (likeId !== null) dispatch(deleteLike(id, likeId));
+        else if (!isPostCreator) dispatch(createLike(id));
+        else if (isPostCreator && Object.values(likes).length) setVisible(true);
     }
+    console.log(bookmarkId)
+    function onPressBookmarkAction() {
+        if (bookmarkId === null) dispatch(createBookmark(id));
+        else dispatch(deleteBookmark(id));
+    }
+
     return (
         <div>
             <ModalLikes
@@ -35,12 +45,12 @@ function PostIconsBlock(props) {
                 <div className='flex '>
                     {likeId !== null ?
                         <div className='flex-align-center mr-20 pointer'>
-                            <img src={liked} onClick={() => dispatch(deleteLike(id, likeId.id))}/> <span className='ml-10'>{amountOfLikes}</span>
-
+                            <img src={liked} onClick={() => dispatch(deleteLike(id, likeId.id))}/> <span
+                            className='ml-10'>{amountOfLikes}</span>
                         </div> :
                         <div className='flex-align-center mr-20 pointer'>
-                            <img src={like} onClick={() => onPressLikeAction()}/> <span className='ml-10'>{amountOfLikes}</span>
-
+                            <img src={like} onClick={() => onPressLikeAction()}/> <span
+                            className='ml-10'>{amountOfLikes}</span>
                         </div>
                     }
                     <div className=" flex-align-center pointer">
@@ -48,7 +58,18 @@ function PostIconsBlock(props) {
                     </div>
                 </div>
                 <div className=" flex-align-center pointer">
-                    <img src={bookmark} width={20} height={19}/>
+                    {bookmarkId === null
+                        ? <img src={bookmarkIcon}
+                               width={20}
+                               height={19}
+                               onClick={() => onPressBookmarkAction()}
+                        />
+                        : <img src={bookmarkedIcon}
+                               width={20}
+                               height={19}
+                               onClick={() => onPressBookmarkAction()}
+                        />
+                    }
                 </div>
             </div>
         </div>

@@ -23,6 +23,7 @@ import Test from "../Components/Test";
 import {CloudinaryContext} from "cloudinary-react";
 import MissingCreateForm from "../Components/Main/Pages/Missings/annotation/missingCreateForm";
 import CreateMissing from "../Components/Main/Pages/Missings/create";
+import Bookmarks from "../Components/Main/Pages/Bookmarks";
 
 function Routing(props) {
     const history = createBrowserHistory();
@@ -41,6 +42,7 @@ function Routing(props) {
                                     <PrivateRoute path='/notifications' component={Notifications} />
                                     <PrivateRoute path='/missings' component={MissingAds} />
                                     <PrivateRoute path='/createMissing' component={CreateMissing} />
+                                    <PrivateRoute path='/bookmarks' component={Bookmarks} />
                                     <Route  path='/user/:id' component={User} />
                                     <Route  path='/pet/:id' component={Pet} />
                                     <Route  path='/test' component={Test} />

@@ -4,6 +4,7 @@ import logo from '../../../Assets/img/logo.svg'
 import ReusableImage from "../../Reusable/Image";
 import {useDispatch, useSelector} from "react-redux";
 import chatIcon from "../../../Assets/svg/chat.svg"
+import bookmarkIcon from "../../../Assets/svg/bookmark.svg"
 import searchIcon from "../../../Assets/svg/search.svg"
 import notificationIcon from "../../../Assets/svg/notification.svg"
 import missingsIcon from "../../../Assets/svg/megaphone.svg"
@@ -51,12 +52,15 @@ function Header() {
                         />
                         <img src={searchIcon} alt="search-icon"/>
                     </div>
+                    <div className='ml-30 relative pointer' onClick={() => history.push('/bookmarks')}>
+                        <img src={bookmarkIcon} />
+                    </div>
                     <div className='ml-30 relative pointer' onClick={() => history.push('/notifications')}>
                         <img src={notificationIcon} alt="notification-icon"/>
                         {notificationCount > 0 && <ReusableBadge amount={notificationCount}/>}
                     </div>
-                    <div className='ml-20 pointer' onClick={() => history.push('/missings')}>
-                        <img src={missingsIcon} alt={'missings-icon'} />
+                    <div className='  pointer ml-30' onClick={() => history.push('/chat')}>
+                        <img src={chatIcon} width={25} height={22} alt="chat-icon"/>
                     </div>
                 </div>
                 <div   className='flex-align-center '>
@@ -83,9 +87,7 @@ function Header() {
                             </div>
                         </ReusableDropdown>
                     </div>
-                    <div className='  pointer ml-80' onClick={() => history.push('/chat')}>
-                        <img src={chatIcon} width={25} height={22} alt="chat-icon"/>
-                    </div>
+
                 </div>
 
             </div>

@@ -4,7 +4,9 @@ import {API_ROUTES} from "../../Constants";
 import Actions from "../action";
 import {getKey} from "../../Utils/arrayMethods";
 import {pet} from './pet'
-export const user = new Reducer('_USER', {data:{}, current:null, subscriptions:[]});
+import {post} from "./post";
+
+export const user = new Reducer('_USER', {data:{}, current:null, subscriptions:[], bookmarks:[]});
 export const userActions = new Actions('user', user)
 
 export const getCurrentUser = _ => async (dispatch) => {
@@ -51,6 +53,23 @@ export const getSubscriptions = _ =>async (dispatch) => {
         key:'subscriptions'
     });
 };
+export const getBookmarksFeed = _ => async (dispatch) => {
+    const {data} = await api({URL:API_ROUTES.GET_BOOKMARKS_FEED, METHOD:'get'});
+    const {posts, items} = data;
+    dispatch({
+        type: post.actionTypes['APPEND'],
+        payload: posts,
+    });
+    dispatch({
+        type: user.actionTypes['SET'],
+        payload:items,
+        key:'bookmarks'
+    });
+};
+
+
+
+
 
 
 export const updateImage = (file, route, model) =>  async (dispatch, getState) => {

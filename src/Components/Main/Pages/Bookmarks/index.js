@@ -1,33 +1,38 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect} from "react";
+import {getBookmarksFeed} from "../../../../store/modules/user";
 import {useDispatch, useSelector} from "react-redux";
-import {userActions} from "../../../../store/modules/user";
-import {postActions} from "../../../../store/modules/post";
-import {GET_BY_ID, GET_LIST} from "../../../../store/types";
 import ShortPost from "../Pet/Feed/shortPost";
 import ShortAnnotation from "../../Layout/Annotatiton/ShortAnnotation";
 import ResponsiveContext from "../../../../Context/responsiveContext";
-import './style.scss'
 
-function Feed() {
+const Bookmarks = () => {
+    const dispatch = useDispatch();
+
+    async function initialize() {
+        await dispatch(getBookmarksFeed());
+    }
     const current = useSelector(s => s.user.current || {});
     const user = useSelector(s => s.user.data[current] || {});
+    const items = useSelector(s => s.user.bookmarks || []);
     const posts = useSelector(s => s.post.data || []);
     const {username, background, id} = user;
-    const dispatch = useDispatch()
+
+
     useEffect(() => {
-        if (!user.length) dispatch(userActions[GET_BY_ID](current))
-        dispatch(postActions[GET_LIST](current))
-    }, [])
-    const RenderFeed = _ => Object.values(posts).map(el => {
-        return Object.values(posts).length ? (
+        initialize().then(callback => console.log(callback))
+
+    }, []);
+
+    const postList = Object.values(items).map(el => posts[el]);
+
+    const RenderBookmarkFeed = _ => postList.map(el => {
+        return postList.length ? (
             <ShortPost content={el.content} id={el.id}/>
         ) : <span>Лента пока что пуста...</span>
     })
-
-    const mobile = useContext(ResponsiveContext)
-
+    const mobile = useContext(ResponsiveContext);
     return (
-        <div className="Feed">
+        <>
             {!mobile &&
             <ShortAnnotation
                 username={username}
@@ -35,10 +40,9 @@ function Feed() {
                 id={id}
             />}
             <div className='mt-60 main-feed'>
-                <RenderFeed/>
+                <RenderBookmarkFeed/>
             </div>
-        </div>
-    );
+        </>
+    )
 }
-
-export default Feed;
+export default Bookmarks;

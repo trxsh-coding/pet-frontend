@@ -32,8 +32,13 @@ function Login() {
                           onClick={() => history.push('/auth/registration')}>
                           Зарегистрироваться</span>
                 </div>
+                <div className='register-link mb-10'>
+                    <span>Забыли пароль?</span>
+                    <span className='link'
+                          onClick={() => history.push('/auth/forgotPassword')}>
+                          Восстановать</span>
+                </div>
             </ReusableForm>
-
         </div>
     );
 }

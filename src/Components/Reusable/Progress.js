@@ -1,10 +1,11 @@
 import React from "react";
 import './reusable.scss'
-function ProgressReusable({width = 200, height, progress= 0}) {
+function ProgressReusable({width = 200, styles, progress= 0}) {
 
     const progressStyle = {
         width:typeof width === 'number' ? width + 'px' : width,
-        height:'30px'
+        height:'30px',
+        ...styles
     }
 
     return (
@@ -12,7 +13,6 @@ function ProgressReusable({width = 200, height, progress= 0}) {
             <div style={{width:progress + '%'}} className='progress-line'>
             </div>
             <span> Загрузка </span>
-
         </div>
     )
 }

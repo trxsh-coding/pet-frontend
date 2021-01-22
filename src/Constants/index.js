@@ -51,6 +51,22 @@ export const API_ROUTES = Object.freeze({
      */
 
     SIGN_UP: `api/v1/user/signup`,
+
+
+    /**
+     * @description user forgot password, POST request
+     * @param none
+     */
+
+    RESET_PASSWORD:  (token) =>`api/v1/user/resetPassword/${token}`,
+
+    /**
+     * @description user forgot password, POST request
+     * @param none
+     */
+
+    FORGOT_PASSWORD: `api/v1/user/forgotPassword`,
+
     /**
      * @description user login in, POST request
      * @returns {object}
@@ -240,6 +256,15 @@ export const API_ROUTES = Object.freeze({
 
     CREATE_LIKE : (id) => `api/v1/like/${id}`,
 
+
+    /**
+     * @description get Bookmarks Feed , Post request
+     * @returns {object, array}
+     */
+
+
+    GET_BOOKMARKS_FEED : `api/v1/post/getBookmarkedPosts/`,
+
     /**
      * @description delete like, DELETE request
      * @returns {string}
@@ -250,9 +275,24 @@ export const API_ROUTES = Object.freeze({
     DELETE_LIKE : (id) => `api/v1/like/${id}`,
 
     /**
-     * @description create missing adv, POST request
+     * @description create bookmark, POST request
      * @returns {object}
-     * @param none
+     * @param id
+     */
+
+    CREATE_BOOKMARK : `api/v1/bookmark/`,
+
+    /**
+     * @description delete bookmark, DELETE request
+     * @returns {object}
+     * @param id
+     */
+
+    DELETE_BOOKMARK : `api/v1/bookmark/`,
+
+    /**
+     * @description create missing, POST request
+     * @returns {object}
      */
 
     CREATE_MISSING : `api/v1/missing/`,

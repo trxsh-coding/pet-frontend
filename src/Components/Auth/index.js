@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Login from './Login'
 import Registration from './Registration'
 import './style.scss'
+import Forgot from "./Forgot";
+import Reset from "./Reset";
 const backgroundStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize:'cover',
@@ -17,6 +19,9 @@ function Auth() {
             <div className='overlay'/>
             <Route exact strict path ="/auth/login"   component={Login}/>
             <Route exact strict path ="/auth/registration"  component={Registration}/>
+            <Route exact strict path ="/auth/forgotPassword"  component={Forgot}/>
+            <Route exact strict path ="/auth/resetPassword/:token"  component={Reset}/>
+
         </div>
     );
 }
