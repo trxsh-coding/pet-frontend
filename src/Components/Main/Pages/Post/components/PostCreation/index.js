@@ -64,10 +64,12 @@ const PostCreation = ({id}) => {
                 return <ImageSource
                     file={file}
                     url={url}
+                    onClearState={onClearState}
                     onSubmit={onSubmitImage}/>
             case file && type && type.includes('video'):
                 return <VideoSource
                     file={file}
+                    onClearState={onClearState}
                     onSubmit={onSubmitVideo}/>
             default:
                 return null

@@ -7,7 +7,7 @@ import history from "../../../../services/history";
 
 function MobileMenu() {
     const [visible, setVisible] = useState(false);
-    const RenderBackDrop = _ => visible && <div className='backdrop' onClick={() => setVisible(false)}/>
+    const RenderBackDrop = _ => visible && <div className='backdrop pointer' onClick={() => setVisible(false)}/>
     const location = useLocation()
     useEffect(() => {
         setVisible(false)

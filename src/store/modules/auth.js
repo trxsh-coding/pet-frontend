@@ -27,15 +27,47 @@ export const signIn = payload => async (dispatch) => {
 
 
 export const signUp = payload => async (dispatch) => {
+
     const {data} = await api({URL:API_ROUTES.SIGN_UP, METHOD:'POST', BODY:payload});
+
+    dispatch({
+        type: auth.actionTypes['SET'],
+        payload: data ? 'success' : 'fail',
+        key:'status'
+    });
+    dispatch({
+        type: user.actionTypes['APPEND'],
+        payload: data,
+    });
+    dispatch({
+        type: user.actionTypes['SET'],
+        payload: getKey(data),
+        key:'current'
+    });
     return data;
 
 };
 
+export const logout = _ => async (dispatch) => {
+    dispatch({
+        type: auth.actionTypes['RESET_STATE'],
+    });
+    dispatch({
+        type: user.actionTypes['RESET_STATE'],
+    });
+    const {data} = await api({URL:API_ROUTES.LOGOUT, METHOD:'get'})
+
+    return data
+}
+
 export const ForgotPassword = payload => async (dispatch) => {
 
     const {data} = await api({URL:API_ROUTES.FORGOT_PASSWORD, METHOD:'POST', BODY:payload});
-
+    dispatch({
+        type: auth.actionTypes['SET'],
+        key:'status',
+        payload:true
+    });
     return data;
 
 };

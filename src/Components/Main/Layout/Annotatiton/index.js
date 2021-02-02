@@ -26,7 +26,7 @@ const ImageWrapper = ({children, route, model, current, action, id, disableUploa
             await dispatch(userActions[UPDATE_PICTURE](file, route, model, id))
     }
 
-    return current && disableUpload ? (
+    return current && !disableUpload ? (
         <ReusableUpload
             action={(file) => onUpload({route, model, id, file})}
             type={route}

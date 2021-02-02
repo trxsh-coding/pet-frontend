@@ -13,7 +13,7 @@ function DrawerHeader({avatar, name, id}) {
                     <ReusableImage size={40} fromServer link={avatar} rounded/>
                     <div className='ml-10  flex-evenly self-stretch flex-column'>
                         <span className='font-16'>{name}</span>
-                        <span className='open__item' onClick={() => history.push(`/user/${id}`)}>Открыть профиль</span>
+                        <span className='open__item pointer' onClick={() => history.push(`/user/${id}`)}>Открыть профиль</span>
                     </div>
                 </div>
                 <div className='ml-30 relative pointer' onClick={() => history.push('/chat')}>

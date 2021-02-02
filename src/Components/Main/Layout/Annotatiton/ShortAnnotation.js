@@ -27,7 +27,9 @@ function ShortAnnotation() {
 
     const RenderLinksBlock = _ => (
         <>
-            <span style={LinksTextDecoration('feed')} onClick={() => history.push(`/`)}>Лента</span>
+            <span style={LinksTextDecoration('feed')}
+                  className='pointer'
+                  onClick={() => history.push(`/`)}>Лента</span>
             <span style={LinksTextDecoration('/subscriptions')} onClick={() => history.push(`/subscriptions`)}>Подписки</span>
             <span style={LinksTextDecoration('/missings')} onClick={() => history.push(`/missings`)}>Поиск Пропавших</span>
         </>

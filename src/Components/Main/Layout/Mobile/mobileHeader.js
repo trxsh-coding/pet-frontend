@@ -21,7 +21,13 @@ function MobileHeader({action}) {
     useEffect(() => {
     }, [location])
     const RenderLogoIcon = _ =>
-        <img src={logo} height={38} width={47} alt="logo" onClick={() => onRouterPush('')}/>
+        <img src={logo}
+             height={38}
+             width={47}
+             alt="logo"
+             className='pointer'
+             onClick={() => onRouterPush('')}
+        />
 
     const RenderTitle = ({title}) => {
         return (

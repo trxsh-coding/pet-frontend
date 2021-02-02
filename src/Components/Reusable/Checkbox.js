@@ -6,7 +6,7 @@ const ReusableCheckbox= (props) => {
     return (
         <div className='flex-align-center'>
             <span className='font-16 light-weight pr-10'>{title}</span>
-            <div className='checkbox-wrapper flex-align-center flex-center'
+            <div className='checkbox-wrapper flex-align-center flex-center pointer'
                  onClick={() => handleChange(value)}
             >
                 {isChecked && <img src={checkIcon} alt='checkbox-icon'/>}

@@ -19,7 +19,7 @@ function RoomAnnotation(props) {
     )
     return (
         <div>
-            <div className="RoomAnnotation flex mt-20 mb-10" onClick={() => history.push(`chat/room/${id}`)}>
+            <div className="RoomAnnotation flex mt-20 mb-10 pointer" onClick={() => history.push(`chat/room/${id}`)}>
                 <ReusableImage width='60px' height='60px' rounded fromServer link={user.avatar}/>
                 <MessageAnnotation />
             </div>

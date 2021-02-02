@@ -17,6 +17,7 @@ import {api} from "../../../Utils/fetch";
 import {API_ROUTES} from "../../../Constants";
 import ReusableBadge from "../../Reusable/Badge";
 import {getNotificationsCount} from "../../../store/modules/notifications";
+import {logout} from "../../../store/modules/auth";
 function Header() {
     const current = useSelector( s => s.user.current || {}) ;
     const user = useSelector( s => s.user.data[current] || {}) ;
@@ -25,32 +26,41 @@ function Header() {
     const history = useHistory();
     const dispatch = useDispatch()
     const renderHeader = !history.location.pathname.includes('auth');
-
+    const [value, setValue] = useState('')
     useEffect(() => {
         dispatch(getNotificationsCount())
     }, [user])
     function onKeyPressAction(e) {
         if(e.key === 'Enter') history.push({
             pathname: '/search',
-            state: e.target.value
+            state: value
         })
     }
+
+    function onPressIconAction() {
+        history.push({
+            pathname: '/search',
+            state: value
+        })
+    }
+
     async function onCookieDelete() {
-        const {data} = await api({URL:API_ROUTES.LOGOUT, METHOD:'get'})
-        if(data) history.push('/auth/login')
+        history.push('/auth/login')
+        await dispatch(logout())
     }
     return renderHeader && (
         <div className="header flex-align-center">
             <div className="container flex-between flex" >
                 <div className="logo-navbar flex-align-center">
-                    <img src={logo} alt="Logo" onClick={() => history.push('/')} />
+                    <img src={logo} alt="Logo"  className='pointer' onClick={() => history.push('/')} />
                     <div className='search-input ml-50 flex-between flex'>
                         <input type="text"
                                className='  '
                                placeholder={'Введите имя или породу...'}
                                onKeyPress={onKeyPressAction}
+                               onChange={(e) => setValue(e.target.value)}
                         />
-                        <img src={searchIcon} alt="search-icon"/>
+                        <img src={searchIcon} alt="search-icon" className='pointer' onClick={onPressIconAction}/>
                     </div>
                     <div className='ml-30 relative pointer' onClick={() => history.push('/bookmarks')}>
                         <img src={bookmarkIcon} />

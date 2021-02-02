@@ -6,7 +6,7 @@ function MessageHeader({user}) {
     const history = useHistory()
     const UserAnnotation = _ => (
         <div className='flex-align-center'>
-            <div onClick={() => history.push(`/user/${user.id}`)}>
+            <div  className='pointer' onClick={() => history.push(`/user/${user.id}`)}>
                 <ReusableImage rounded size={40} fromServer link={user.avatar}/>
             </div>
             <div>

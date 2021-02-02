@@ -7,7 +7,7 @@ function DrawerLinks() {
     const history = useHistory()
     const RenderRouteList = _ => Object.keys(ROUTE_NAMES.MAIN).map( el => {
         return el !== 'CHAT' && (
-            <div className='mobile-links-wrapper' onClick={() => {
+            <div className='mobile-links-wrapper pointer' onClick={() => {
                 el === '/' ? history.push('/') : history.push(`/${el.toLocaleLowerCase()}`)
             }}>
                 <span className='pt-20'>{ROUTE_NAMES.MAIN[el]}</span>

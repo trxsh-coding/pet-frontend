@@ -12,12 +12,12 @@ export const setModal = payload => dispatch => {
 }
 export const createMissing = payload => async (dispatch) => {
     const formData = new FormData();
-    console.log(payload.coordinates)
     for (let key in payload){
         if(key !== 'images' && key !== 'coordinates') formData.append(key, payload[key])
     }
-    for (let key in payload.coordinates){
-       formData.append('coordinates', payload.coordinates[key])
+    for (let item in payload.coordinates){
+        if(payload.coordinates) formData.append('coordinates', payload.coordinates[item])
+        else formData.append('coordinates', '')
     }
     for (let key in payload.images){
         if(payload.images[key] !== null) formData.append('images', payload.images[key])
@@ -33,7 +33,7 @@ export const createMissing = payload => async (dispatch) => {
         return data._id;
 
     }catch (e) {
-        console.trace(e)
+        return e.response.data
     }
 };
 

@@ -8,7 +8,6 @@ import Aside from "../../Layout/Aside";
 import SearchInput from "./layout/searchInput";
 import ResponsiveContext from "../../../../Context/responsiveContext";
 import './style.scss'
-import ShortAnnotation from "../../Layout/Annotatiton/ShortAnnotation";
 
 function Search(props) {
     const dispatch = useDispatch();
@@ -17,16 +16,18 @@ function Search(props) {
     const [query, setQuery] = useState('name')
 
     function initialize(value) {
-        if(value) dispatch(searchPet({[query] : value}))
+        if (value) dispatch(searchPet({[query]: value}))
     }
+
     useEffect(() => {
         initialize(value)
-    }, [query])
-    const RenderPetMap = () => {
-        const search = useSelector( s => s.pet.search || []);
-        const pets = useSelector( s => s.pet.data || []);
+    }, [query, value])
 
-        return search.map( el => {
+    const RenderPetMap = () => {
+        const search = useSelector(s => s.pet.search || []);
+        const pets = useSelector(s => s.pet.data || []);
+
+        return search.map(el => {
             const pet = pets[el]
             return (
                 <div className='flex-center flex flex-align-center flex-column search-item pointer'
@@ -40,8 +41,8 @@ function Search(props) {
         })
     }
     const map = {
-        name:'Имя',
-        breed:'Порода'
+        name: 'Имя',
+        breed: 'Порода'
     }
 
     const mobile = useContext(ResponsiveContext)
@@ -49,8 +50,8 @@ function Search(props) {
         <div className={`Search ${mobile ? 'flex-column-reverse' : 'flex'}`}>
             <ComponentWrapper title='Поиск' width={878}>
                 <div className={mobile ? 'wrapper-space' : ''}>
-                    <SearchInput  value={value} action={(e) => initialize(e)} />
-                    <div className='flex items-container mt-20'><RenderPetMap /></div>
+                    <SearchInput value={value} action={(e) => initialize(e)}/>
+                    <div className='flex items-container mt-20'><RenderPetMap/></div>
                 </div>
             </ComponentWrapper>
             <Aside

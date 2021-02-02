@@ -6,7 +6,7 @@ function ShortPet(props) {
     const {url, name, id} = props;
     const history = useHistory();
     return (
-        <div onClick={() => history.push(`/pet/${id}`)} className='flex-column w-fit mr-60'>
+        <div onClick={() => history.push(`/pet/${id}`)} className='flex-column pointer w-fit mr-60'>
             <ReusableImage size={165} fromServer link={url}/>
             <span className='pet-name mt-10'>{name}</span>
         </div>

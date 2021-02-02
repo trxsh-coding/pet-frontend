@@ -11,7 +11,7 @@ const ReusableInput = (props) => {
         value,
         key,
         type = 'input',
-        placeholder = 'Описание',
+        placeholder = '',
         background = '#f2f2f2',
         fixedSize,
         autoFocus = true
@@ -66,7 +66,7 @@ const ReusableInput = (props) => {
                          onKeyPress={onKeyPressAction}
                 />
             }
-            <div onClick={() => action()}><RenderChildrenIcon/></div>
+            <div className='pointer' onClick={() => action()}><RenderChildrenIcon/></div>
         </div>
     )
 };

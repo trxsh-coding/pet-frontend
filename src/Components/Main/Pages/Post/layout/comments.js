@@ -40,6 +40,7 @@ function PostComments(props) {
             <ReusableInput onChange={(e) => setComment(e)}
                            value={comment}
                            styles={{flex:0}}
+                           placeholder='Комментарий'
                            action={() => onCommentSaved()}/>
         </div>
     )

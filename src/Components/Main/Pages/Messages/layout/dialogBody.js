@@ -14,7 +14,6 @@ function DialogBody(props) {
     useEffect(scrollToBottom,[messages])
 
     const RenderMessagesList = _ => messages ? messages.map( el => {
-        console.log(el)
         const isReceiver = receiver.id === el.receiverId
         const messageBodyStyle = {
             backgroundColor: isReceiver ?
@@ -30,13 +29,13 @@ function DialogBody(props) {
             color: isReceiver ?
                 '#ffffff' : '#000000'
         }
-        console.log(members)
-        console.log(el.creatorId)
+        console.log('members', members)
+        console.log('creator', el.creatorId)
         return (
             <div className='flex-column pt-20' style={messageContainerStyle}>
                 {!mobile && members &&
                     <ReusableImage
-                        link={members[el.creatorId].avatar}
+                        link={members[el.creatorId]?.avatar}
                         size={40}
                         rounded
                         fromServer

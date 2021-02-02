@@ -49,7 +49,7 @@ function MissingAds(props) {
         })
     }
     const AddNewMissingBlock = _ => mobile &&
-        <div style={{padding:'16px'}} className='flex-align-center flex-between' onClick={() => setModal(true)}>
+        <div style={{padding:'16px'}} className='flex-align-center flex-between pointer' onClick={() => setModal(true)}>
             <span className='mr-15'>Добавить объявление</span>
             <img src={plus} alt="add-icon"/>
         </div>

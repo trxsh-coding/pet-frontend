@@ -19,7 +19,8 @@ export default class Reducer {
             UPDATE_FIELD: 'UPDATE_FIELD',
             APPEND_TO_CHILD: 'APPEND_TO_CHILD',
             CHANGE_QUANTITY: 'CHANGE_QUANTITY',
-            UPDATE_NESTED_FIELD:'UPDATE_NESTED_FIELD'
+            UPDATE_NESTED_FIELD:'UPDATE_NESTED_FIELD',
+            RESET_STATE:'RESET_STATE'
         }
     }
     _setActionPrefix(prefix, action) {
@@ -46,7 +47,8 @@ export default class Reducer {
             UPDATE_FIELD,
             APPEND_TO_CHILD,
             CHANGE_QUANTITY,
-            UPDATE_NESTED_FIELD
+            UPDATE_NESTED_FIELD,
+            RESET_STATE
         } = this.actionTypes;
 
         const {type, payload, key} = action;
@@ -96,11 +98,11 @@ export default class Reducer {
                     }
                 }
             }
-
-
-
-
-
+            case RESET_STATE: {
+                return {
+                    ...this.initialState
+                }
+            }
             case UPDATE: {
                 const {_id, value, key} = payload;
                 state.data[_id] = {...state.data[_id], ...{[key]:value}};

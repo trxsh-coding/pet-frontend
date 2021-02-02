@@ -54,7 +54,7 @@ function UserInfoSection(props) {
     const RenderPetBlock = ({pet})=> {
         const {avatar} = pet;
         return (
-                <div className=' flex-align-center mt-20 mb-10' onClick={() => history.push(`/pet/${pet.id}`)}>
+                <div className=' flex-align-center mt-20 mb-10 pointer' onClick={() => history.push(`/pet/${pet.id}`)}>
                     <ReusableImage link={avatar} rounded size={40} fromServer/>
                     <span className='pl-15 light-weight font-16'>{pet.name}</span>
                 </div>
@@ -92,7 +92,7 @@ function UserInfoSection(props) {
     }
     const RenderInfoBlock = ({value, field}) => editable ? <EditInput value={value} field={field}/> : <span>{value}</span>
     const PetModalList = _ => pets.map(el => (
-       <div className='flex-align-center flex-column mb-20 pointer mr-20' onClick={() => history.push(`/pet/${el.id}`)}>
+       <div className='flex-align-center flex-column mb-20 pointer mr-20 pointer' onClick={() => history.push(`/pet/${el.id}`)}>
            <ReusableImage link={el.avatar} size={100} rounded fromServer/>
            <span style={{color:'#4A76A8'}} className='font-16 mt-10'>{el.name}</span>
        </div>
@@ -125,7 +125,8 @@ function UserInfoSection(props) {
                                         + {pets.length - 1}
                                     </span>
                                 </div>
-                                <span className='light-weight font-16 pl-15 pointer'>Смотреть всех</span>
+                                <span className='light-weight font-16 pl-15 pointer'
+                                      onClick={() => setVisible(true)}>Смотреть всех</span>
                             </div>
                         </>
                     )

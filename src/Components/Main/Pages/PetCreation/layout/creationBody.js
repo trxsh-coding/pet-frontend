@@ -62,17 +62,17 @@ function CreationBody(props) {
             <div className='flex mt-15'>
                 <div className='mr-10'>
                     <ReusableCheckbox
-                        isChecked={values.gender === 'male'}
+                        isChecked={values.gender === 'Мужской'}
                         handleChange={(e) => customStateChange({key:'gender', value:e})}
-                        value={'male'}
+                        value={'Мужской'}
                         title='М'/>
                 </div>
                 <div className='mr-10'>
                     <ReusableCheckbox
                         title='Ж'
                         handleChange={(e) => customStateChange({key:'gender', value:e})}
-                        value={'female'}
-                        isChecked={values.gender === 'female'}/>
+                        value={'Женский'}
+                        isChecked={values.gender === 'Женский'}/>
                 </div>
             </div>
         </div>

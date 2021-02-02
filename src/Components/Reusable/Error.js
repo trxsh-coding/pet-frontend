@@ -1,7 +1,7 @@
 import React from 'react'
 import './reusable.scss'
-const ReusableDropdown = (props) => {
-    const {children, visible, action} = props;
+const ReusableError = (props) => {
+    const {error} = props;
     return visible ? (
         <div className='dropdown' onClick={() => action(true)}>
             <div className='flex-column pointer'

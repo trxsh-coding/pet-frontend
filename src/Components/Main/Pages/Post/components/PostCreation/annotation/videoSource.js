@@ -11,7 +11,7 @@ import ReusableButton from "../../../../../../Reusable/Button";
 
 const VideoSource = (props) => {
 
-    const {file, onSubmit} = props;
+    const {file, onSubmit, onClearState} = props;
 
     const mobile = useContext(ResponsiveContext);
 
@@ -42,6 +42,7 @@ const VideoSource = (props) => {
 
     return (
         <ReusableModal
+            onClose={onClearState}
             width={mobile ? '100%' : '700px'}
             height={mobile ? '100%' : 'fit-content'}
             styles={{position: 'fixed'}}
@@ -72,6 +73,7 @@ VideoSource.propTypes = {
     file: PropTypes.object.isRequired,
     onSubmit: PropTypes.object.isRequired,
     children: PropTypes.element,
+    onClearState:PropTypes.func
 };
 
 export default VideoSource;

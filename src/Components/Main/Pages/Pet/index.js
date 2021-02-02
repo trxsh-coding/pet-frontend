@@ -30,7 +30,7 @@ function Pet(props) {
         amountOfFollowers,
         breed
     } = pet;
-    const isOwner = current == ownerId
+    const isOwner = current === ownerId
     const [editable, setEditable] = useState(false)
     useEffect(() => {
         dispatch(petActions[GET_BY_ID](id))
