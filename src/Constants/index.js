@@ -16,6 +16,8 @@ export const translateKeyword = key => {
             return 'Пол';
         case 'breed' :
             return 'Порода';
+        case 'passwordConfirm':
+            return 'Повторите пароль'
         default:
             return key
     }
@@ -29,7 +31,7 @@ export const ROUTE_NAMES = Object.freeze({
    },
    MAIN: {
        '':'Лента',
-       MISSINGS:'Объявления',
+       MISSINGS:'Поиск пропавших',
        SUBSCRIPTIONS:'Подписки',
        SEARCH:'Поиск',
        NOTIFICATIONS:'Уведомления',
@@ -37,8 +39,8 @@ export const ROUTE_NAMES = Object.freeze({
    },
    SHORT: {
        '':'Лента',
-       MISSINGS:'Объявления',
-       SUBSCRIPTIONS:'Подписки'
+       SUBSCRIPTIONS:'Подписки',
+       MISSINGS:'Поиск пропавших'
    }
 });
 

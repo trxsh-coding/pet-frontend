@@ -20,7 +20,6 @@ const ReusableInput = (props) => {
         minHeight: fixedSize + 'px',
         maxHeight: fixedSize + 'px',
         background: background
-
     }
     const inputWrapperStyle = {
         flex: 1,
@@ -47,23 +46,25 @@ const ReusableInput = (props) => {
     }
     return (
         <div style={inputWrapperStyle} className='input-wrapper'>
-            { type === 'textarea'
-                ? <textarea onChange={(e) => onChangeAction(e.target.value)}
-                            ref={inputEl}
-                            onKeyPress={onKeyPressAction}
-                            className='input-textarea'
-                            rows={1} style={textareaStyle}
-                            value={value}
-                            autoFocus={autoFocus}
-                            placeholder={placeholder}
-                            defaultValue=''/>
-                : <input key={key}
-                         style={{background: background}}
-                         onChange={(e) => onChange(e.target.value)}
-                         className='reusable-input'
-                         placeholder={placeholder}
-                         value={value}
-                         onKeyPress={onKeyPressAction}
+            {type === 'textarea'
+                ? <textarea
+                    onChange={(e) => onChangeAction(e.target.value)}
+                    ref={inputEl}
+                    onKeyPress={onKeyPressAction}
+                    className='input-textarea'
+                    rows={1} style={textareaStyle}
+                    value={value}
+                    autoFocus={autoFocus}
+                    placeholder={placeholder}
+                    defaultValue=''/>
+                : <input
+                    key={key}
+                    style={{background: background}}
+                    onChange={(e) => onChange(e.target.value)}
+                    className='reusable-input'
+                    placeholder={placeholder}
+                    value={value}
+                    onKeyPress={onKeyPressAction}
                 />
             }
             <div className='pointer' onClick={() => action()}><RenderChildrenIcon/></div>

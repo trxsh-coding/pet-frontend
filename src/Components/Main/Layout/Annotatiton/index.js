@@ -26,14 +26,13 @@ const ImageWrapper = ({children, route, model, current, action, id, disableUploa
             await dispatch(userActions[UPDATE_PICTURE](file, route, model, id))
     }
 
-    return current && !disableUpload ? (
-        <ReusableUpload
+    return current && !disableUpload
+        ? <ReusableUpload
             action={(file) => onUpload({route, model, id, file})}
-            type={route}
-        >
+            type={route}>
             {children}
         </ReusableUpload>
-    ) : <div> {children} </div>
+        : <div> {children} </div>
 }
 
 function Annotation(props) {

@@ -7,10 +7,7 @@ export const Links = ({username, id}) => {
     const history = useHistory()
     const location = useLocation()
     const links = Object.keys(ROUTE_NAMES.SHORT).map((route, index) => {
-
         const currentLocation = location.pathname === route.toLowerCase()
-
-        console.log(currentLocation)
         return  (
             <Link key={index}
                   to={`/${route.toLowerCase()}`}

@@ -8,6 +8,7 @@ import post from "./modules/post";
 import chat from "./modules/chat";
 import notification from "./modules/notifications";
 import missing from "./modules/missings";
+import search from "./modules/search";
 
 const middleware = applyMiddleware(thunk);
 
@@ -18,7 +19,8 @@ export const rootReducer = combineReducers({
     post,
     chat,
     notification,
-    missing
+    missing,
+    search
 });
 export const store = createStore(rootReducer, composeWithDevTools(middleware));
 

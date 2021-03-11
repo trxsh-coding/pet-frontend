@@ -143,7 +143,6 @@ export default class Reducer {
             }
             case CHANGE_QUANTITY: {
                 const {key, map, field, type} = payload;
-                console.log(state[map][key][field])
                 return  {
                     ...state,
                     [map]: {

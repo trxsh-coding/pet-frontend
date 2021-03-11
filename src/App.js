@@ -1,8 +1,7 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
-import Header from "./Components/Main/Layout/Header";
+import React, {useEffect, useState} from 'react';
 import {getStatus} from "./api/status";
 import Routing from "./router";
-import {Provider, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import {getCurrentUser} from "./store/modules/user";
 import './styles.scss'
 import Spinner from "./Components/Reusable/Spinner";
