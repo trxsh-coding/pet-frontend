@@ -63,5 +63,5 @@
   "devDependencies": {
     "moment": "^2.27.0"
   },
-  "proxy": "https://petsnhouse.herokuapp.com"
+  "proxy": "https://api.pethouse.cat"
 }

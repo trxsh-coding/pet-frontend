@@ -6,6 +6,7 @@ import UserPets from "./pets";
 import {GET_BY_ID} from "../../../../store/types";
 import UserInfoSection from "./pets/infoSection";
 import Spinner from "../../../Reusable/Spinner";
+import UserSettings from "./settings";
 
 function User(props) {
     const { match } = props;
@@ -41,6 +42,7 @@ function User(props) {
                 lastSeen={user.lastSeen}
                 about={user.about}
             />
+            <UserSettings />
         </div>
     );
 }
