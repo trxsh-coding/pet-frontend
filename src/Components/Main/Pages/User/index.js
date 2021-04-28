@@ -13,9 +13,8 @@ function User(props) {
     const { id } = match.params;
     const user = useSelector(s => s.user.data[id] || {});
     const loading = useSelector(s => s.user.loading);
-    const current = useSelector(s => s.user.current == id );
     const currentId = useSelector(s => s.user.current );
-
+    const isCurrent = currentId === id;
     const {pets} = useSelector(s => s.user.data[id] || []);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -27,13 +26,12 @@ function User(props) {
             <Annotation username={user.username}
                         avatar={user.avatar}
                         background={user.background}
-                        current={current}
-                        id={user._id}
-                        disableUpload
+                        current={isCurrent}
+                        id={user.id}
 
             />
             <UserInfoSection
-                current={current}
+                current={isCurrent}
                 currentId={currentId}
                 pets={user.pets}
                 phone={user.phone}

@@ -1,0 +1,1 @@
+export const getUnreadCount = (store) => store.notification.unreadCount

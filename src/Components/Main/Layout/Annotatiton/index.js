@@ -15,7 +15,17 @@ import history from "../../../../services/history";
 import {petActions} from "../../../../store/modules/pet";
 import ResponsiveContext from "../../../../Context/responsiveContext";
 
-const ImageWrapper = ({children, route, model, current, action, id, disableUpload = false}) => {
+const ImageWrapper = (props) => {
+    const {
+        children,
+        route,
+        model,
+        current,
+        action,
+        id,
+        disableUpload = false
+    } = props;
+
     const dispatch = useDispatch();
 
     async function onUpload(props) {

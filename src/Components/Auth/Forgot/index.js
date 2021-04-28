@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import ReusableForm from "../../Reusable/Form";
 import {ForgotPassword, signIn} from "../../../store/modules/auth";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 import '../style.scss'
 
 function Forgot() {
@@ -19,13 +18,19 @@ function Forgot() {
             })
 
     };
-    const form = { email:''};
+    const form = {email: ''};
     const formStyle = {
-        width:'300px'
+        width: '300px'
     };
     return (
-        <div className="Login" style={{zIndex:10}}>
-            <ReusableForm form={form} onSubmit={login} addStyles={formStyle} />
+        <div className="Login" style={{zIndex: 10}}>
+            <ReusableForm form={form} onSubmit={login} addStyles={formStyle} buttonText='Восстановить'>
+                <div className='register-link mb-10'>
+                   <span className='link' onClick={() => history.go(-1)}>
+                    Назад
+                </span>
+                </div>
+            </ReusableForm>
         </div>
     );
 }

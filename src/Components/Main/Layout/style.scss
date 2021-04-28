@@ -160,24 +160,41 @@
 }
 
 .short-annotation {
-  .username-block {
-    flex:0.3;
-    justify-content: center;
-    align-items: center;
+  .annotation-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity:0.5;
+    background: #000000;
+    z-index: 1;
+  }
+  .short-annotation-wrapper {
     display: flex;
-    span {
-      font-size: 20px;
-      color: #ffffff;
+    height: 100%;
+    .username-block {
+      z-index: 10;
+      flex:0.3;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      span {
+        font-size: 20px;
+        color: #ffffff;
+      }
+    }
+    .links-block {
+      z-index: 10;
+
+      flex: 0.7;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      span {
+        cursor: pointer;
+        color:#ffffff;
+      }
     }
   }
-  .links-block {
-    flex: 0.7;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    span {
-      cursor: pointer;
-      color:#ffffff;
-    }
-  }
+
 }

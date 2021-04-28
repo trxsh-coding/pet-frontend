@@ -16,7 +16,7 @@ import Auth from "../Components/Auth";
 import Subscriptions from "../Components/Main/Pages/Subscriptions";
 import {PrivateRoute} from "./privateRoute";
 import MissingAds from "../Components/Main/Pages/Missings";
-import { createBrowserHistory } from 'history';
+import {createBrowserHistory} from 'history';
 import RenderHeader from "../Components/Main/Layout/RenderHeader";
 import Missing from "../Components/Main/Pages/Missing";
 import Test from "../Components/Test";
@@ -25,33 +25,34 @@ import MissingCreateForm from "../Components/Main/Pages/Missings/annotation/miss
 import CreateMissing from "../Components/Main/Pages/Missings/create";
 import Bookmarks from "../Components/Main/Pages/Bookmarks";
 
+
+const history = createBrowserHistory();
+
 function Routing(props) {
-    const history = createBrowserHistory();
-    console.log(history, 'history')
     return (
-                <Router history={history}>
-                    <RenderHeader />
-                        <Switch>
-                            <Route path ="/auth"  component={Auth}/>
-                                <div className="container main-wrapper">
-                                    <PrivateRoute exact path='/' component={Feed} />
-                                    <PrivateRoute exact path='/subscriptions' component={Subscriptions} />
-                                    <PrivateRoute exact path='/chat' component={Chat} />
-                                    <PrivateRoute path='/chat/room/:id' component={Messages} />
-                                    <PrivateRoute path='/add-pet' component={PetCreation} />
-                                    <PrivateRoute path='/notifications' component={Notifications} />
-                                    <PrivateRoute path='/missings' component={MissingAds} />
-                                    <PrivateRoute path='/createMissing' component={CreateMissing} />
-                                    <PrivateRoute path='/bookmarks' component={Bookmarks} />
-                                    <Route  path='/user/:id' component={User} />
-                                    <Route  path='/pet/:id' component={Pet} />
-                                    <Route  path='/test' component={Test} />
-                                    <Route  path='/post/:id' component={Post} />
-                                    <Route  path='/missing/:id' component={Missing} />
-                                    <Route  path='/search' component={Search} />
-                                </div>
-                        </Switch>
-                </Router>
+        <Router history={history}>
+            <RenderHeader/>
+            <Switch>
+                <Route path="/auth" component={Auth}/>
+                <div className="container main-wrapper">
+                    <PrivateRoute exact path='/subscriptions' component={Subscriptions}/>
+                    <PrivateRoute exact path='/chat' component={Chat}/>
+                    <PrivateRoute path='/chat/room/:id' component={Messages}/>
+                    <PrivateRoute path='/add-pet' component={PetCreation}/>
+                    <PrivateRoute path='/notifications' component={Notifications}/>
+                    <PrivateRoute path='/createMissing' component={CreateMissing}/>
+                    <PrivateRoute path='/bookmarks' component={Bookmarks}/>
+                    <Route path='/user/:id' component={User}/>
+                    <Route path='/pet/:id' component={Pet}/>
+                    <Route path='/test' component={Test}/>
+                    <Route path='/post/:id' component={Post}/>
+                    <Route path='/missing/:id' component={Missing}/>
+                    <Route path='/search' component={Search}/>
+                    <Route path='/missings' component={MissingAds}/>
+                    <Route exact path='/' component={Feed}/>
+                </div>
+            </Switch>
+        </Router>
     )
 
 }

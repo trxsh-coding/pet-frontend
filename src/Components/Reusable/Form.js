@@ -5,32 +5,36 @@ import ReusableButton from "./Button";
 import {translateKeyword} from "../../Constants";
 
 
+export const ReusableForm = (props) => {
 
-export const ReusableForm = ({form, addStyles, onSubmit, primary, children, errors}) => {
-    const onSubmitEvent = () => {
-        onSubmit(values)
-    };
-
-    const [values, handleChange, customStateChange, handleSubmit] = useForm(form, onSubmitEvent);
+    const {
+        form,
+        addStyles,
+        onSubmit,
+        primary,
+        children,
+        errors,
+        buttonText = "Войти"
+    } = props;
 
     const formStyle = {
-        display:'flex',
-        flexDirection:'column',
+        display: 'flex',
+        flexDirection: 'column',
         ...addStyles
     };
     const secondaryStyle = {
-      backgroundColor:'transparent',
-      border: '0.5px solid #ffffff',
-      color:"#ffffff",
-      padding:'10px 5px',
-      marginBottom: errors? '10px' : '20px'
+        backgroundColor: 'transparent',
+        border: '0.5px solid #ffffff',
+        color: "#ffffff",
+        padding: '10px 5px',
+        marginBottom: errors ? '10px' : '20px'
     };
     const primaryStyle = {
-        backgroundColor:'transparent',
+        backgroundColor: 'transparent',
         border: '0.5px solid #E5E5E5',
-        color:"#000",
-        padding:'10px 5px',
-        marginBottom: errors? '10px' : '20px'
+        color: "#000",
+        padding: '10px 5px',
+        marginBottom: errors ? '10px' : '20px'
 
     };
     const calculateTypeOfField = type => {
@@ -44,20 +48,32 @@ export const ReusableForm = ({form, addStyles, onSubmit, primary, children, erro
                 return 'text'
         }
     }
+
+
+    const onSubmitEvent = () => {
+        onSubmit(values)
+    };
+
+    const [values, handleChange, customStateChange, handleSubmit] = useForm(form, onSubmitEvent);
+
+
     const inputList = _ => {
-        return Object.keys(form).map( el => {
+        return Object.keys(form).map((el, index) => {
+
             return (
-                <div className='flex-column'>
-                    <input type={calculateTypeOfField(el)}
-                           style={primary ? primaryStyle : secondaryStyle}
-                           name={el}
-                           value={values[el] || ""}
-                           onChange={handleChange}
-                           placeholder={translateKeyword(el)}
-                           key={el}
-                    />
-                    {errors && <span style={{fontSize:'12px', color:'#a90000'}}>{errors[el]}</span>}
-                </div>
+                <React.Fragment key={index}>
+                    <div className='flex-column'>
+                        <input type={calculateTypeOfField(el)}
+                               style={primary ? primaryStyle : secondaryStyle}
+                               name={el}
+                               value={values[el] || ""}
+                               onChange={handleChange}
+                               placeholder={translateKeyword(el)}
+                               key={el}
+                        />
+                        {errors && <span style={{fontSize: '12px', color: '#a90000'}}>{errors[el]}</span>}
+                    </div>
+                </React.Fragment>
             )
         })
     };
@@ -67,8 +83,8 @@ export const ReusableForm = ({form, addStyles, onSubmit, primary, children, erro
             <form style={{...formStyle}} onSubmit={handleSubmit}>
                 {inputList()}
                 {children}
-                <ReusableButton >
-                    Отправить
+                <ReusableButton>
+                    {buttonText}
                 </ReusableButton>
             </form>
         </>
@@ -76,7 +92,11 @@ export const ReusableForm = ({form, addStyles, onSubmit, primary, children, erro
 };
 
 ReusableForm.propTypes = {
-    form: PropTypes.object.isRequired
+    form: PropTypes.object.isRequired,
+    buttonText: PropTypes.string,
+    addStyles: PropTypes.object,
+    onSubmit: PropTypes.func.isRequired,
+    errors: PropTypes.object,
 };
 
 export default ReusableForm;

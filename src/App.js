@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {getCurrentUser} from "./store/modules/user";
 import './styles.scss'
 import Spinner from "./Components/Reusable/Spinner";
+import {withToastProvider} from "./Context/toast";
 
 
 function App(props) {
@@ -17,15 +18,14 @@ function App(props) {
 
     useEffect(() => {
         initialize()
-            .then(callback =>dispatch(getCurrentUser()))
+            .then(callback => dispatch(getCurrentUser()))
             .finally( () => setLoading(false))
     }, [])
 
-    return loading ? <div className='transform-center'> <Spinner/> </div> : (
-                <div className="App">
-                        <Routing/>
-                </div>
-    );
+    return loading
+        ? <div className='transform-center'> <Spinner/> </div>
+        : <div className="App"> <Routing/> </div> ;
+
 }
 
-export default App;
+export default withToastProvider(App);

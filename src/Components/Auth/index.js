@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import bg from '../../Assets/img/auth-bg.jpeg'
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Login from './Login'
@@ -6,12 +6,16 @@ import Registration from './Registration'
 import './style.scss'
 import Forgot from "./Forgot";
 import Reset from "./Reset";
+import useQuery from "../../CustomHooks/useQuery";
+import {getCurrentUser} from "../../store/modules/user";
+import {useToast} from "../../Context/toast";
 const backgroundStyle = {
     backgroundImage: `url(${bg})`,
-    backgroundSize:'cover',
+    backgroundSize:'130%',
     height:'100%',
-    width:'100%'
+    width:'100%',
 };
+
 
 function Auth() {
     return (

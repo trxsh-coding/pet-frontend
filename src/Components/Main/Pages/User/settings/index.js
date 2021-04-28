@@ -8,36 +8,30 @@ import Notifications from "./notifications";
 import Password from "./password";
 
 const SettingsComponent = ({filter}) => {
-		switch (filter){
-				case ESettingsTypes.personal:
-						return <Personal />;
-				case ESettingsTypes.notifications:
-						return <Notifications />;
-				case ESettingsTypes.password:
-						return <Password />;
-		}
+    switch (filter) {
+        case ESettingsTypes.personal:
+            return <Personal/>;
+        case ESettingsTypes.notifications:
+            return <Notifications/>;
+        case ESettingsTypes.password:
+            return <Password/>;
+    }
 }
 
 
 const UserSettings = () => {
-		
-		const [filter, setFilter] = useState(ESettingsTypes.personal)
-		
-		
-		
-		return (
-				<div className='user-settings-wrapper'>
-						<ComponentWrapper>
-								<SettingsComponent filter={filter} />
-						</ComponentWrapper>
-						<Aside
-								filters={ESettingsFilters}
-								value={filter}
-								action={setFilter}
-								map={ESettingsTypes}
-						/>
-				</div>
-		)
+
+    const [filter, setFilter] = useState(ESettingsTypes.personal)
+
+
+    return (
+        <div className='user-settings-wrapper'>
+            <ComponentWrapper>
+                <SettingsComponent filter={filter}/>
+            </ComponentWrapper>
+            <Aside filters={ESettingsFilters} value={filter} action={setFilter} map={ESettingsTypes}/>
+        </div>
+    )
 }
 
 export default UserSettings;
